@@ -18,10 +18,35 @@
     <ClCompile Include="ParticleOpenGl.h">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowManager.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ShaderLoader.h">
-      <Filter>Pliki źródłowe</Filter>
+    <ClInclude Include="InputManager.h">
+      <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="WindowManager.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fragmentShader.fragmentshader" />
+    <None Include="vertexShader.vertexshader" />
   </ItemGroup>
 </Project>
