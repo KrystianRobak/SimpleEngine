@@ -3,6 +3,7 @@
 #include <GLFW/glfw3.h>
 #include "glm.hpp"
 #include <../glm/gtc/matrix_transform.hpp>
+#include "Camera.h"
 
 class InputManager
 {
@@ -14,8 +15,11 @@ public:
 
 	void ComputeMatricesFromInput();
 
+	void ProcessInput(float deltaTime);
+
 private:
 	GLFWwindow* window;
-
+	Camera* camera;
+	bool cursorTogglePressed = false;
 };
 

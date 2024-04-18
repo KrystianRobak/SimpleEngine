@@ -24,9 +24,8 @@ Index of this file:
 */
 
 // Navigating this file:
-// - In Visual Studio: CTRL+comma ("Edit.GoToAll") can follow symbols inside comments, whereas CTRL+F12 ("Edit.GoToImplementation") cannot.
-// - In Visual Studio w/ Visual Assist installed: ALT+G ("VAssistX.GoToImplementation") can also follow symbols inside comments.
-// - In VS Code, CLion, etc.: CTRL+click can follow symbols inside comments.
+// - In Visual Studio IDE: CTRL+comma ("Edit.GoToAll") can follow symbols in comments, whereas CTRL+F12 ("Edit.GoToImplementation") cannot.
+// - With Visual Assist installed: ALT+G ("VAssistX.GoToImplementation") can also follow symbols in comments.
 
 //-----------------------------------------------------------------------------
 // [SECTION] Commentary
@@ -499,7 +498,6 @@ bool    ImGui::BeginTableEx(const char* name, ImGuiID id, int columns_count, ImG
     table->DeclColumnsCount = table->AngledHeadersCount = 0;
     if (previous_frame_active + 1 < g.FrameCount)
         table->IsActiveIdInTable = false;
-    table->AngledHeadersHeight = 0.0f;
     temp_data->AngledHeadersExtraWidth = 0.0f;
 
     // Using opaque colors facilitate overlapping lines of the grid, otherwise we'd need to improve TableDrawBorders()
@@ -1068,7 +1066,6 @@ void ImGui::TableUpdateLayout(ImGuiTable* table)
         // - ClipRect.Max.x: using WorkMaxX instead of MaxX (aka including padding) makes things more consistent when resizing down, tho slightly detrimental to visibility in very-small column.
         // - ClipRect.Max.x: using MaxX makes it easier for header to receive hover highlight with no discontinuity and display sorting arrow.
         // - FIXME-TABLE: We want equal width columns to have equal (ClipRect.Max.x - WorkMinX) width, which means ClipRect.max.x cannot stray off host_clip_rect.Max.x else right-most column may appear shorter.
-        const float previous_instance_work_min_x = column->WorkMinX;
         column->WorkMinX = column->MinX + table->CellPaddingX + table->CellSpacingX1;
         column->WorkMaxX = column->MaxX - table->CellPaddingX - table->CellSpacingX2; // Expected max
         column->ItemWidth = ImTrunc(column->WidthGiven * 0.65f);
@@ -1121,22 +1118,8 @@ void ImGui::TableUpdateLayout(ImGuiTable* table)
         //    column->WorkMinX = ImLerp(column->WorkMinX, ImMax(column->StartX, column->MaxX - column->ContentWidthRowsUnfrozen), 0.5f);
 
         // Reset content width variables
-        if (table->InstanceCurrent == 0)
-        {
-            column->ContentMaxXFrozen = column->WorkMinX;
-            column->ContentMaxXUnfrozen = column->WorkMinX;
-            column->ContentMaxXHeadersUsed = column->WorkMinX;
-            column->ContentMaxXHeadersIdeal = column->WorkMinX;
-        }
-        else
-        {
-            // As we store an absolute value to make per-cell updates faster, we need to offset values used for width computation.
-            const float offset_from_previous_instance = column->WorkMinX - previous_instance_work_min_x;
-            column->ContentMaxXFrozen += offset_from_previous_instance;
-            column->ContentMaxXUnfrozen += offset_from_previous_instance;
-            column->ContentMaxXHeadersUsed += offset_from_previous_instance;
-            column->ContentMaxXHeadersIdeal += offset_from_previous_instance;
-        }
+        column->ContentMaxXFrozen = column->ContentMaxXUnfrozen = column->WorkMinX;
+        column->ContentMaxXHeadersUsed = column->ContentMaxXHeadersIdeal = column->WorkMinX;
 
         // Don't decrement auto-fit counters until container window got a chance to submit its items
         if (table->HostSkipItems == false)
@@ -1257,7 +1240,7 @@ void ImGui::TableUpdateBorders(ImGuiTable* table)
     ImGuiTableInstanceData* table_instance = TableGetInstanceData(table, table->InstanceCurrent);
     const float hit_half_width = TABLE_RESIZE_SEPARATOR_HALF_THICKNESS;
     const float hit_y1 = (table->FreezeRowsCount >= 1 ? table->OuterRect.Min.y : table->WorkRect.Min.y) + table->AngledHeadersHeight;
-    const float hit_y2_body = ImMax(table->OuterRect.Max.y, hit_y1 + table_instance->LastOuterHeight - table->AngledHeadersHeight);
+    const float hit_y2_body = ImMax(table->OuterRect.Max.y, hit_y1 + table_instance->LastOuterHeight);
     const float hit_y2_head = hit_y1 + table_instance->LastTopHeadersRowHeight;
 
     for (int order_n = 0; order_n < table->ColumnsCount; order_n++)
@@ -3202,7 +3185,7 @@ void ImGui::TableAngledHeadersRowEx(float angle, float max_label_width)
     // Calculate our base metrics and set angled headers data _before_ the first call to TableNextRow()
     // FIXME-STYLE: Would it be better for user to submit 'max_label_width' or 'row_height' ? One can be derived from the other.
     const float header_height = g.FontSize + g.Style.CellPadding.x * 2.0f;
-    const float row_height = ImTrunc(ImFabs(ImRotate(ImVec2(max_label_width, flip_label ? +header_height : -header_height), cos_a, sin_a).y));
+    const float row_height = ImFabs(ImRotate(ImVec2(max_label_width, flip_label ? +header_height : -header_height), cos_a, sin_a).y);
     table->AngledHeadersHeight = row_height;
     table->AngledHeadersSlope = (sin_a != 0.0f) ? (cos_a / sin_a) : 0.0f;
     const ImVec2 header_angled_vector = unit_right * (row_height / -sin_a); // vector from bottom-left to top-left, and from bottom-right to top-right

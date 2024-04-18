@@ -13,7 +13,12 @@ public:
 	Shader(const char* vertexPath, const char* fragmentPath);
 
     void Use();
+
+    unsigned int get_program_id() { return ID; }
+
+
     // utility uniform functions
+
     void SetBool(const std::string& name, bool value) const;
     // ------------------------------------------------------------------------
     void SetInt(const std::string& name, int value) const;
@@ -30,7 +35,7 @@ private:
 
     void CheckCompileErrors(unsigned int shader, std::string type);
 
-public:
+private:
 	unsigned int ID;
 
 };

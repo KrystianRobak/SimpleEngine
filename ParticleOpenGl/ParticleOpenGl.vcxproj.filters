@@ -19,21 +19,45 @@
     <Filter Include="Pliki nagłówkowe\imgui">
       <UniqueIdentifier>{699c5b41-ffdb-4638-98f1-137219b13f9f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\objects">
+      <UniqueIdentifier>{6da54ea1-2f08-45e0-8650-431eeae5f857}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\objects">
+      <UniqueIdentifier>{927601aa-9bcd-4737-904b-b971a6954cdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Render">
+      <UniqueIdentifier>{4ef8621b-454f-4e1d-922d-ab8edcd5d768}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Render\UI">
+      <UniqueIdentifier>{7087a9d1-66ee-4db3-9064-3b43db650a1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Render\Context">
+      <UniqueIdentifier>{e9676b50-b311-4e8e-bde7-e9596ba8d028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Render">
+      <UniqueIdentifier>{b64ae5d9-54e3-4ea0-b881-cc2ac68cb855}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Render\UI">
+      <UniqueIdentifier>{3347633f-d889-4fb3-a30e-c7b723afd9e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Render\Context">
+      <UniqueIdentifier>{06ab498e-5004-478e-94e1-130baaa4a186}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\ECS">
+      <UniqueIdentifier>{9fb2fb28-17cb-448f-ad2a-3db46dbd5866}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\ECS">
+      <UniqueIdentifier>{64a5c96f-2fc6-4535-99db-1435fcb16cdd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ParticleOpenGl.h">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="WindowManager.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui_widgets.cpp">
@@ -57,6 +81,63 @@
     <ClCompile Include="imgui\imgui_tables.cpp">
       <Filter>Pliki źródłowe\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="FileBrowser.cpp">
+      <Filter>Pliki źródłowe\Render\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyPanel.cpp">
+      <Filter>Pliki źródłowe\Render\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneView.cpp">
+      <Filter>Pliki źródłowe\Render\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Pliki źródłowe\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Pliki źródłowe\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Pliki źródłowe\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemsSelectionPanel.cpp">
+      <Filter>Pliki źródłowe\Render\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="LightSource.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameBuffer.cpp">
+      <Filter>Pliki źródłowe\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGlFrameBuffer.cpp">
+      <Filter>Pliki źródłowe\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGlContext.cpp">
+      <Filter>Pliki źródłowe\Render\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderContext.cpp">
+      <Filter>Pliki źródłowe\Render\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="UIContext.cpp">
+      <Filter>Pliki źródłowe\Render\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Pliki źródłowe\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Pliki źródłowe\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputManager.h">
@@ -66,9 +147,6 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imgui.h">
@@ -97,6 +175,66 @@
     </ClInclude>
     <ClInclude Include="imgui\imconfig.h">
       <Filter>Pliki nagłówkowe\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="FileBrowser.h">
+      <Filter>Pliki nagłówkowe\Render\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneView.h">
+      <Filter>Pliki nagłówkowe\Render\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyPanel.h">
+      <Filter>Pliki nagłówkowe\Render\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Pliki nagłówkowe\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Pliki nagłówkowe\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Pliki nagłówkowe\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="UIComponent.h">
+      <Filter>Pliki nagłówkowe\Render\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsSelectionPanel.h">
+      <Filter>Pliki nagłówkowe\Render\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManager.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="LightSource.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameBuffer.h">
+      <Filter>Pliki nagłówkowe\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="IWindow.h">
+      <Filter>Pliki nagłówkowe\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGlFrameBuffer.h">
+      <Filter>Pliki nagłówkowe\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Pliki nagłówkowe\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGlContext.h">
+      <Filter>Pliki nagłówkowe\Render\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderContext.h">
+      <Filter>Pliki nagłówkowe\Render\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="UIContext.h">
+      <Filter>Pliki nagłówkowe\Render\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Pliki nagłówkowe\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

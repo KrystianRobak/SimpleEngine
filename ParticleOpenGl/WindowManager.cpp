@@ -19,9 +19,7 @@ GLFWwindow* WindowManager::GetWindow()
             glfwTerminate();
         }
 
-        bool bIsWindowFocused = true;
 
-        glfwSetWindowFocusCallback(window, WindowManager::focusCallback);
         // Make the window's context current
         glfwMakeContextCurrent(window);
         glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
@@ -38,13 +36,4 @@ GLFWwindow* WindowManager::GetWindow()
     }
 
     return window;
-}
-
-
-void WindowManager::focusCallback(GLFWwindow* window, int focused)
-{
-    if (focused == GLFW_TRUE)
-        bIsFocused = true;
-    else
-        bIsFocused = false;
 }
