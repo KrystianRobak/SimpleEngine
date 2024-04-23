@@ -1,8 +1,8 @@
 #pragma once
 #include "WindowManager.h"
 #include <GLFW/glfw3.h>
-#include "glm.hpp"
-#include <../glm/gtc/matrix_transform.hpp>
+#include <../glm.hpp>
+#include <../gtc/matrix_transform.hpp>
 #include "Camera.h"
 
 class InputManager

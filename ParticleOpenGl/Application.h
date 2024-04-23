@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "Window.h"
+#include "Coordinator.h"
 
 class Application
 {
@@ -11,9 +12,14 @@ public:
 
 	void loop();
 
+	void Init();
+
+	void GameLoop();
+
 private:
 	static Application* sInstance;
-
+	Coordinator coordinator;
 	std::unique_ptr<Window> window;
+	float dt = 0.0f;
 };
 

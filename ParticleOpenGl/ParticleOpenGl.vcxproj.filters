@@ -49,6 +49,18 @@
     <Filter Include="Pliki źródłowe\ECS">
       <UniqueIdentifier>{64a5c96f-2fc6-4535-99db-1435fcb16cdd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\ECS\Components">
+      <UniqueIdentifier>{091e936d-2829-436b-817c-11202f5be670}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\ECS\Components">
+      <UniqueIdentifier>{3b4e72ef-667e-4e97-bf13-6bd35b08214d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\ECS\Systems">
+      <UniqueIdentifier>{9427fa4e-45cb-4a88-94fb-0143123b7164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\ECS\Systems">
+      <UniqueIdentifier>{5034786d-7a7f-4d63-a2c4-6a255c7139ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ParticleOpenGl.h">
@@ -132,14 +144,38 @@
     <ClCompile Include="Window.cpp">
       <Filter>Pliki źródłowe\Render</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
+    <ClCompile Include="EntityManager.cpp">
       <Filter>Pliki źródłowe\ECS</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Pliki źródłowe\ECS</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
+    <ClCompile Include="System.cpp">
       <Filter>Pliki źródłowe\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Coordinator.cpp">
+      <Filter>Pliki źródłowe\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemManager.cpp">
+      <Filter>Pliki źródłowe\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="LightComponent.cpp">
+      <Filter>Pliki źródłowe\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshComponent.cpp">
+      <Filter>Pliki źródłowe\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentManager.cpp">
+      <Filter>Pliki źródłowe\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicComponent.cpp">
+      <Filter>Pliki źródłowe\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureComponent.cpp">
+      <Filter>Pliki źródłowe\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicSystem.cpp">
+      <Filter>Pliki źródłowe\ECS\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -233,13 +269,40 @@
     <ClInclude Include="UIContext.h">
       <Filter>Pliki nagłówkowe\Render\Context</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
+    <ClInclude Include="EntityManager.h">
       <Filter>Pliki nagłówkowe\ECS</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>Pliki nagłówkowe\ECS</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
+    <ClInclude Include="System.h">
+      <Filter>Pliki nagłówkowe\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManager.h">
+      <Filter>Pliki nagłówkowe\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Coordinator.h">
+      <Filter>Pliki nagłówkowe\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureComponent.h">
+      <Filter>Pliki nagłówkowe\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicComponent.h">
+      <Filter>Pliki nagłówkowe\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshComponent.h">
+      <Filter>Pliki nagłówkowe\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LightComponent.h">
+      <Filter>Pliki nagłówkowe\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentManager.h">
+      <Filter>Pliki nagłówkowe\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicSystem.h">
+      <Filter>Pliki nagłówkowe\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
       <Filter>Pliki nagłówkowe\ECS</Filter>
     </ClInclude>
   </ItemGroup>
