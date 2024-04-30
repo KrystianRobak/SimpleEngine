@@ -1,30 +1,30 @@
 #pragma once
+
 #include "GL/glew.h"
 #include <GLFW/glfw3.h>
-#include <utility>
+#include <bitset>
+#include <string>
 
-#define INITIAL_WIDTH 1024
-#define INITIAL_HEIGHT 768
 
 class WindowManager
 {
-private:
-	WindowManager() {
+public:
+	void Init(
+		std::string const& windowTitle, unsigned int windowWidth, unsigned int windowHeight,
+		unsigned int windowPositionX, unsigned int windowPositionY);
+
+	void Update();
+	GLFWwindow* GetWindow()
+	{
+		return this->mWindow;
 	}
 
-public:
-	static GLFWwindow* GetWindow();
-	static void focusCallback(GLFWwindow* window, int focused);
-	static bool IsFocused() { return bIsFocused; };
-	static int GetWidth() { return width; };
-	static int GetHeight() { return height; };
-	static std::pair<float, float> GetMouseLocation() { return mouseLocation; };
+	void ProcessEvents();
+
+	void Shutdown();
+
 private:
-	static GLFWwindow* window;
-	static bool bIsFocused;
+	GLFWwindow* mWindow;
 
-	static std::pair<float, float> mouseLocation;
-	static int width;
-	static int height;
+	std::bitset<8> mButtons;
 };
-

@@ -1,6 +1,6 @@
 #include "Window.h"
 
-bool Window::init(int width, int height, const std::string& title)
+bool Window::Init(int width, int height, const std::string& title)
 {
     this->width = width;
     this->height = height;
@@ -12,7 +12,7 @@ bool Window::init(int width, int height, const std::string& title)
     propertyPanel = std::make_unique<PropertyPanel>();
     sceneView = std::make_unique<SceneView>();
     fileBrowser = std::make_unique<FileBrowser>();
-    AssetManager::Init();
+   
     return mIsRunning;
 }
 
@@ -59,5 +59,4 @@ void Window::Render()
     // Render end, swap buffers
     mRenderCtx->post_render();
 
-    AssetManager::DeleteModels();
 }

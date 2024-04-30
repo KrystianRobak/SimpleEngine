@@ -10,7 +10,6 @@
 #include "SceneView.h"
 #include "FileBrowser.h"
 #include "ItemsSelectionPanel.h"
-#include "AssetManager.h"
 
 
 class Window : public IWindow
@@ -25,7 +24,7 @@ public:
 
     ~Window();
 
-    bool init(int width, int height, const std::string& title);
+    bool Init(int width, int height, const std::string& title);
 
     void Render();
 

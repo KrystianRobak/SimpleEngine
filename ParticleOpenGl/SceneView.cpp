@@ -1,5 +1,10 @@
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <iostream>
+
+#include "Window.h"
 #include "SceneView.h"
-#include "AssetManager.h"
+
 
 std::vector<std::string> splitString(const std::string& str, char delimiter) {
     std::vector<std::string> tokens;
@@ -21,29 +26,15 @@ void SceneView::resize(int32_t width, int32_t height)
 
 void SceneView::Render()
 {
-    AssetManager* assetManager = AssetManager::GetInstance();
-
-    Shader* objectShader = assetManager->GetObjectShader().get();
-    Shader* lightShader = assetManager->GetLightShader().get();
-    
-    objectShader->Use();
-
-    glm::mat4 projection = glm::perspective(glm::radians(camera.get()->Zoom), size.x / size.y, 0.1f, 100.0f);
-    glm::mat4 view = camera.get()->GetViewMatrix();
-
     frameBuffer->bind();
 
-    for (auto model : assetManager->GetModels())
-    {
-        model->Draw(*objectShader, projection, view);
-    }
-
-    for (auto lightSource : assetManager->GetLightSources())
-    {
-        //lightSource->Draw(*lightShader, projection, view);
-    }
+    application->Render();
 
     frameBuffer->unbind();
+    
+    //if (application->IsRunning())
+    application->Update();
+
 
     ImGui::Begin("Scene");
 
@@ -61,7 +52,42 @@ void SceneView::Render()
                 if (parts.size() == 2) {
                     std::string name = parts[0];
                     std::string path = parts[1];
-                    assetManager->CreateModel(path, name);
+                    
+                    Coordinator* coordinator = Coordinator::GetCoordinator();
+
+                    Entity entity = coordinator->CreateEntity();
+
+                    coordinator->AddComponent(
+                        entity,
+                        Transform{
+                            .position = glm::vec3(1, 1, -30),
+                            .rotation = glm::vec3(0, 0.1, 0),
+                            .scale = glm::vec3(3, 3, 3)
+                        });
+
+                    coordinator->AddComponent(
+                        entity,
+                        Renderable{
+                            .color = glm::vec4(40,40,40, 1)
+                        });
+
+                    coordinator->AddComponent<Gravity>(
+                        entity,
+                        { glm::vec3(0.0f, -3, 0.0f) });
+
+                    coordinator->AddComponent(
+                        entity,
+                        RigidBody{
+                            .velocity = glm::vec3(0.0f, 0.0f, 0.0f),
+                            .acceleration = glm::vec3(0.0f, 0.0f, 0.0f)
+                        });
+
+                    coordinator->AddComponent(
+                        entity,
+                        CollisionSphere{
+                            .centerPoint = glm::vec3(1,1,-30),
+                            .radius = 1
+                        });
                 }
             }
         } 
@@ -69,4 +95,5 @@ void SceneView::Render()
     }
 
     ImGui::End();
-} 
+}
+

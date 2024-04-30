@@ -1,25 +1,47 @@
 #pragma once
-#include <string>
-#include "Window.h"
-#include "Coordinator.h"
+
+#include "Gravity.h"
+#include "RigidBody.h"
+#include "Renderable.h"
+#include "Thrust.h"
+#include "Transform.h"
+#include "Collision.h"
+#include "Camera.h"
+#include "Player.h"
+#include "Thrust.h"
+
+#include "coordinator.h"
+
+#include "CameraControlSystem.h"
+#include "PhysicsSystem.h"
+#include "PlayerControlSystem.h"
+#include "RenderSystem.h"
+
+#include "WindowManager.h"
+#include <chrono>
+#include <random>
+
 
 class Application
 {
 public:
-	Application(const std::string& app_name);
-
-	static Application& Instance() { return *sInstance; }
-
-	void loop();
-
 	void Init();
+	void Update();
+	void Render();
 
-	void GameLoop();
+	void RenderEntitiesUI();
 
+	void ToggleApplication()
+	{
+		running != running;
+	}
+
+	bool IsRunning()
+	{
+		return running;
+	}
 private:
-	static Application* sInstance;
-	Coordinator coordinator;
-	std::unique_ptr<Window> window;
 	float dt = 0.0f;
+	bool running = false;
 };
 

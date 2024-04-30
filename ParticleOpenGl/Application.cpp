@@ -1,90 +1,146 @@
 #include "Application.h"
 
-#include "PhysicComponent.h"
-#include "PhysicSystem.h"
-#include <random>
-
-
-Application::Application(const std::string& app_name)
-{
-    window = std::make_unique<Window>();
-    window->init(1024, 720, app_name);
-
-}
-
 void Application::Init()
 {
-    coordinator.Init();
+	Coordinator* coordinator = Coordinator::GetCoordinator();
 
-    coordinator.RegisterComponent<Gravity>();
-    coordinator.RegisterComponent<RigidBody>();
-    coordinator.RegisterComponent<Transform>();
+	coordinator->RegisterComponent<Camera>();
+	coordinator->RegisterComponent<Gravity>();
+	coordinator->RegisterComponent<Player>();
+	coordinator->RegisterComponent<Renderable>();
+	coordinator->RegisterComponent<RigidBody>();
+	coordinator->RegisterComponent<Thrust>();
+	coordinator->RegisterComponent<Transform>();
+	coordinator->RegisterComponent<CollisionSphere>();
 
-    auto physicSystem = coordinator.RegisterSystem<PhysicSystem>();
-	physicSystem->Bind(coordinator);
 
-    Signature signature;
-    signature.set(coordinator.GetComponentType<Gravity>());
-    signature.set(coordinator.GetComponentType<RigidBody>());
-    signature.set(coordinator.GetComponentType<Transform>());
-    coordinator.SetSystemSignature<PhysicSystem>(signature);
+	auto physicsSystem = coordinator->RegisterSystem<PhysicsSystem>();
+	{
+		Signature signature;
+		signature.set(coordinator->GetComponentType<Gravity>());
+		signature.set(coordinator->GetComponentType<RigidBody>());
+		signature.set(coordinator->GetComponentType<Transform>());
+		signature.set(coordinator->GetComponentType<CollisionSphere>());
+		coordinator->SetSystemSignature<PhysicsSystem>(signature);
+	}
 
-    std::vector<Entity> entities(MAX_ENTITIES);
+	physicsSystem->Init();
+
+
+	auto cameraControlSystem = coordinator->RegisterSystem<CameraControlSystem>();
+	{
+		Signature signature;
+		signature.set(coordinator->GetComponentType<Camera>());
+		signature.set(coordinator->GetComponentType<Transform>());
+		coordinator->SetSystemSignature<CameraControlSystem>(signature);
+	}
+
+	cameraControlSystem->Init();
+
+
+	auto playerControlSystem = coordinator->RegisterSystem<PlayerControlSystem>();
+	{
+		Signature signature;
+		signature.set(coordinator->GetComponentType<Player>());
+		signature.set(coordinator->GetComponentType<Transform>());
+		coordinator->SetSystemSignature<PlayerControlSystem>(signature);
+	}
+
+	playerControlSystem->Init();
+
+
+	auto renderSystem = coordinator->RegisterSystem<RenderSystem>();
+	{
+		Signature signature;
+		signature.set(coordinator->GetComponentType<Renderable>());
+		signature.set(coordinator->GetComponentType<Transform>());
+		coordinator->SetSystemSignature<RenderSystem>(signature);
+	}
+
+	renderSystem->Init();
+
+	/*std::vector<Entity> entities(MAX_ENTITIES - 1);
 
 	std::default_random_engine generator;
-	std::uniform_real_distribution<float> randPosition(-100.0f, 100.0f);
+	std::uniform_real_distribution<float> randPosition(-10.0f, 10.0f);
 	std::uniform_real_distribution<float> randRotation(0.0f, 3.0f);
 	std::uniform_real_distribution<float> randScale(3.0f, 5.0f);
+	std::uniform_real_distribution<float> randColor(0.0f, 1.0f);
 	std::uniform_real_distribution<float> randGravity(-10.0f, -1.0f);
 
 	float scale = randScale(generator);
 
-
 	for (auto& entity : entities)
 	{
-		entity = coordinator.CreateEntity();
+		entity = coordinator->CreateEntity();
+		std::cout << entity << std::endl;
+		coordinator->AddComponent(entity, Player{});
 
-		coordinator.AddComponent(
+		coordinator->AddComponent<Gravity>(
 			entity,
-			Gravity{ glm::vec3(0.0f, randGravity(generator), 0.0f) });
+			{ glm::vec3(0.0f, -3, 0.0f) });
 
-		coordinator.AddComponent(
+		coordinator->AddComponent(
 			entity,
 			RigidBody{
 				.velocity = glm::vec3(0.0f, 0.0f, 0.0f),
 				.acceleration = glm::vec3(0.0f, 0.0f, 0.0f)
 			});
 
-		coordinator.AddComponent(
+		coordinator->AddComponent(
 			entity,
 			Transform{
-				.position = glm::vec3(randPosition(generator), randPosition(generator), randPosition(generator)),
+				.position = glm::vec3(randPosition(generator), randPosition(generator), -30),
 				.rotation = glm::vec3(randRotation(generator), randRotation(generator), randRotation(generator)),
 				.scale = glm::vec3(scale, scale, scale)
 			});
-	}
 
-
+		coordinator->AddComponent(
+			entity,
+			Renderable{
+				.color = glm::vec4(randColor(generator), randColor(generator), randColor(generator), 1)
+			});
+	}*/
 }
 
-void Application::loop()
+void Application::Update()
 {
-	while (window->is_running())
-	{
-		window->Render();
-		GameLoop();
-	}
-}
+	Coordinator* coordinator = Coordinator::GetCoordinator();
+
+	auto playerControlSystem = coordinator->GetSystem<PlayerControlSystem>();
+	auto cameraControlSystem = coordinator->GetSystem<CameraControlSystem>();
+	auto physicsSystem = coordinator->GetSystem<PhysicsSystem>();
 
 
-void Application::GameLoop()
-{
 	auto startTime = std::chrono::high_resolution_clock::now();
-	
-	coordinator.Proceed(dt);
+
+	playerControlSystem->Update(dt);
+
+	cameraControlSystem->Update(dt);
+
+	physicsSystem->Update(dt);
+
 
 	auto stopTime = std::chrono::high_resolution_clock::now();
 
 	dt = std::chrono::duration<float, std::chrono::seconds::period>(stopTime - startTime).count();
+
+}
+
+void Application::Render()
+{
+	Coordinator* coordinator = Coordinator::GetCoordinator();
+
+	auto renderSystem = coordinator->GetSystem<RenderSystem>();
+
+	renderSystem->Update(dt);
+}
+
+
+void Application::RenderEntitiesUI()
+{
+	Coordinator* coordinator = Coordinator::GetCoordinator();
+
+
 
 }

@@ -25,51 +25,51 @@
     <Filter Include="Pliki źródłowe\objects">
       <UniqueIdentifier>{927601aa-9bcd-4737-904b-b971a6954cdb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki nagłówkowe\Render">
-      <UniqueIdentifier>{4ef8621b-454f-4e1d-922d-ab8edcd5d768}</UniqueIdentifier>
+    <Filter Include="Pliki źródłowe\NEW">
+      <UniqueIdentifier>{c63857e5-2cd0-4829-87f2-a88a02e7a323}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki nagłówkowe\Render\UI">
-      <UniqueIdentifier>{7087a9d1-66ee-4db3-9064-3b43db650a1a}</UniqueIdentifier>
+    <Filter Include="Pliki źródłowe\NEW\Core">
+      <UniqueIdentifier>{e5973359-bcac-4e6d-8005-2c11efb740c4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki nagłówkowe\Render\Context">
-      <UniqueIdentifier>{e9676b50-b311-4e8e-bde7-e9596ba8d028}</UniqueIdentifier>
+    <Filter Include="Pliki nagłówkowe\NEW">
+      <UniqueIdentifier>{0d406ce3-54d3-402b-bc0c-8552516bb480}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\Render">
+    <Filter Include="Pliki nagłówkowe\NEW\Core">
+      <UniqueIdentifier>{b76498e9-5170-4f89-8d4c-35b1d84341ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\NEW\Systems">
+      <UniqueIdentifier>{d02f1127-1913-499f-b659-c2c1cc9e257a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\NEW\Components">
+      <UniqueIdentifier>{4cea9d3e-4dfd-444f-b1a3-b167d392148b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\NEW\Components">
+      <UniqueIdentifier>{42c36772-b01c-487a-a9d9-d7e69d8200bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\NEW\Systems">
+      <UniqueIdentifier>{e5e4a3df-e92b-47ab-9de9-17a3424d95df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\NEW\Render">
       <UniqueIdentifier>{b64ae5d9-54e3-4ea0-b881-cc2ac68cb855}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\Render\UI">
+    <Filter Include="Pliki źródłowe\NEW\Render\UI">
       <UniqueIdentifier>{3347633f-d889-4fb3-a30e-c7b723afd9e3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\Render\Context">
+    <Filter Include="Pliki źródłowe\NEW\Render\Context">
       <UniqueIdentifier>{06ab498e-5004-478e-94e1-130baaa4a186}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki nagłówkowe\ECS">
-      <UniqueIdentifier>{9fb2fb28-17cb-448f-ad2a-3db46dbd5866}</UniqueIdentifier>
+    <Filter Include="Pliki nagłówkowe\NEW\Render">
+      <UniqueIdentifier>{4ef8621b-454f-4e1d-922d-ab8edcd5d768}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\ECS">
-      <UniqueIdentifier>{64a5c96f-2fc6-4535-99db-1435fcb16cdd}</UniqueIdentifier>
+    <Filter Include="Pliki nagłówkowe\NEW\Render\UI">
+      <UniqueIdentifier>{7087a9d1-66ee-4db3-9064-3b43db650a1a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki nagłówkowe\ECS\Components">
-      <UniqueIdentifier>{091e936d-2829-436b-817c-11202f5be670}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\ECS\Components">
-      <UniqueIdentifier>{3b4e72ef-667e-4e97-bf13-6bd35b08214d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki nagłówkowe\ECS\Systems">
-      <UniqueIdentifier>{9427fa4e-45cb-4a88-94fb-0143123b7164}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\ECS\Systems">
-      <UniqueIdentifier>{5034786d-7a7f-4d63-a2c4-6a255c7139ff}</UniqueIdentifier>
+    <Filter Include="Pliki nagłówkowe\NEW\Render\Context">
+      <UniqueIdentifier>{e9676b50-b311-4e8e-bde7-e9596ba8d028}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ParticleOpenGl.h">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowManager.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui_widgets.cpp">
@@ -93,101 +93,95 @@
     <ClCompile Include="imgui\imgui_tables.cpp">
       <Filter>Pliki źródłowe\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="FileBrowser.cpp">
-      <Filter>Pliki źródłowe\Render\UI</Filter>
+      <Filter>Pliki źródłowe\NEW\Render\UI</Filter>
     </ClCompile>
     <ClCompile Include="PropertyPanel.cpp">
-      <Filter>Pliki źródłowe\Render\UI</Filter>
+      <Filter>Pliki źródłowe\NEW\Render\UI</Filter>
     </ClCompile>
     <ClCompile Include="SceneView.cpp">
-      <Filter>Pliki źródłowe\Render\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Pliki źródłowe\objects</Filter>
+      <Filter>Pliki źródłowe\NEW\Render\UI</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>Pliki źródłowe\objects</Filter>
     </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>Pliki źródłowe\objects</Filter>
-    </ClCompile>
     <ClCompile Include="ItemsSelectionPanel.cpp">
-      <Filter>Pliki źródłowe\Render\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="AssetManager.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="LightSource.cpp">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Pliki źródłowe\NEW\Render\UI</Filter>
     </ClCompile>
     <ClCompile Include="FrameBuffer.cpp">
-      <Filter>Pliki źródłowe\Render</Filter>
+      <Filter>Pliki źródłowe\NEW\Render</Filter>
     </ClCompile>
     <ClCompile Include="OpenGlFrameBuffer.cpp">
-      <Filter>Pliki źródłowe\Render</Filter>
+      <Filter>Pliki źródłowe\NEW\Render</Filter>
     </ClCompile>
     <ClCompile Include="OpenGlContext.cpp">
-      <Filter>Pliki źródłowe\Render\Context</Filter>
+      <Filter>Pliki źródłowe\NEW\Render\Context</Filter>
     </ClCompile>
     <ClCompile Include="RenderContext.cpp">
-      <Filter>Pliki źródłowe\Render\Context</Filter>
+      <Filter>Pliki źródłowe\NEW\Render\Context</Filter>
     </ClCompile>
     <ClCompile Include="UIContext.cpp">
-      <Filter>Pliki źródłowe\Render\Context</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Pliki źródłowe\NEW\Render\Context</Filter>
     </ClCompile>
     <ClCompile Include="Window.cpp">
-      <Filter>Pliki źródłowe\Render</Filter>
+      <Filter>Pliki źródłowe\NEW\Render</Filter>
     </ClCompile>
-    <ClCompile Include="EntityManager.cpp">
-      <Filter>Pliki źródłowe\ECS</Filter>
+    <ClCompile Include="Event.cpp">
+      <Filter>Pliki źródłowe\NEW\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>Pliki źródłowe\ECS</Filter>
-    </ClCompile>
-    <ClCompile Include="System.cpp">
-      <Filter>Pliki źródłowe\ECS</Filter>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Pliki źródłowe\NEW\Core</Filter>
     </ClCompile>
     <ClCompile Include="Coordinator.cpp">
-      <Filter>Pliki źródłowe\ECS</Filter>
+      <Filter>Pliki źródłowe\NEW\Core</Filter>
     </ClCompile>
-    <ClCompile Include="SystemManager.cpp">
-      <Filter>Pliki źródłowe\ECS</Filter>
-    </ClCompile>
-    <ClCompile Include="LightComponent.cpp">
-      <Filter>Pliki źródłowe\ECS\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshComponent.cpp">
-      <Filter>Pliki źródłowe\ECS\Components</Filter>
+    <ClCompile Include="ComponentArray.cpp">
+      <Filter>Pliki źródłowe\NEW\Core</Filter>
     </ClCompile>
     <ClCompile Include="ComponentManager.cpp">
-      <Filter>Pliki źródłowe\ECS</Filter>
+      <Filter>Pliki źródłowe\NEW\Core</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicComponent.cpp">
-      <Filter>Pliki źródłowe\ECS\Components</Filter>
+    <ClCompile Include="System.cpp">
+      <Filter>Pliki źródłowe\NEW\Core</Filter>
     </ClCompile>
-    <ClCompile Include="TextureComponent.cpp">
-      <Filter>Pliki źródłowe\ECS\Components</Filter>
+    <ClCompile Include="SystemManager.cpp">
+      <Filter>Pliki źródłowe\NEW\Core</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicSystem.cpp">
-      <Filter>Pliki źródłowe\ECS\Systems</Filter>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>Pliki źródłowe\NEW\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraControlSystem.cpp">
+      <Filter>Pliki źródłowe\NEW\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSystem.cpp">
+      <Filter>Pliki źródłowe\NEW\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerControlSystem.cpp">
+      <Filter>Pliki źródłowe\NEW\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSystem.cpp">
+      <Filter>Pliki źródłowe\NEW\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.h">
+      <Filter>Pliki nagłówkowe\NEW\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Pliki źródłowe\NEW\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowManager.cpp">
+      <Filter>Pliki źródłowe\NEW\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="UiSystem.cpp">
+      <Filter>Pliki źródłowe\NEW\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMesh.cpp">
+      <Filter>Pliki źródłowe\NEW\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="InputManager.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="WindowManager.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="imgui\imgui.h">
       <Filter>Pliki nagłówkowe\imgui</Filter>
     </ClInclude>
@@ -215,95 +209,122 @@
     <ClInclude Include="imgui\imconfig.h">
       <Filter>Pliki nagłówkowe\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="Application.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="FileBrowser.h">
-      <Filter>Pliki nagłówkowe\Render\UI</Filter>
+      <Filter>Pliki nagłówkowe\NEW\Render\UI</Filter>
     </ClInclude>
     <ClInclude Include="SceneView.h">
-      <Filter>Pliki nagłówkowe\Render\UI</Filter>
+      <Filter>Pliki nagłówkowe\NEW\Render\UI</Filter>
     </ClInclude>
     <ClInclude Include="PropertyPanel.h">
-      <Filter>Pliki nagłówkowe\Render\UI</Filter>
+      <Filter>Pliki nagłówkowe\NEW\Render\UI</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Pliki nagłówkowe\objects</Filter>
     </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Pliki nagłówkowe\objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Pliki nagłówkowe\objects</Filter>
-    </ClInclude>
     <ClInclude Include="UIComponent.h">
-      <Filter>Pliki nagłówkowe\Render\UI</Filter>
+      <Filter>Pliki nagłówkowe\NEW\Render\UI</Filter>
     </ClInclude>
     <ClInclude Include="ItemsSelectionPanel.h">
-      <Filter>Pliki nagłówkowe\Render\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="AssetManager.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="LightSource.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki nagłówkowe\NEW\Render\UI</Filter>
     </ClInclude>
     <ClInclude Include="FrameBuffer.h">
-      <Filter>Pliki nagłówkowe\Render</Filter>
+      <Filter>Pliki nagłówkowe\NEW\Render</Filter>
     </ClInclude>
     <ClInclude Include="IWindow.h">
-      <Filter>Pliki nagłówkowe\Render</Filter>
+      <Filter>Pliki nagłówkowe\NEW\Render</Filter>
     </ClInclude>
     <ClInclude Include="OpenGlFrameBuffer.h">
-      <Filter>Pliki nagłówkowe\Render</Filter>
+      <Filter>Pliki nagłówkowe\NEW\Render</Filter>
     </ClInclude>
     <ClInclude Include="Window.h">
-      <Filter>Pliki nagłówkowe\Render</Filter>
+      <Filter>Pliki nagłówkowe\NEW\Render</Filter>
     </ClInclude>
     <ClInclude Include="OpenGlContext.h">
-      <Filter>Pliki nagłówkowe\Render\Context</Filter>
+      <Filter>Pliki nagłówkowe\NEW\Render\Context</Filter>
     </ClInclude>
     <ClInclude Include="RenderContext.h">
-      <Filter>Pliki nagłówkowe\Render\Context</Filter>
+      <Filter>Pliki nagłówkowe\NEW\Render\Context</Filter>
     </ClInclude>
     <ClInclude Include="UIContext.h">
-      <Filter>Pliki nagłówkowe\Render\Context</Filter>
+      <Filter>Pliki nagłówkowe\NEW\Render\Context</Filter>
     </ClInclude>
-    <ClInclude Include="EntityManager.h">
-      <Filter>Pliki nagłówkowe\ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Pliki nagłówkowe\ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="System.h">
-      <Filter>Pliki nagłówkowe\ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="SystemManager.h">
-      <Filter>Pliki nagłówkowe\ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="Coordinator.h">
-      <Filter>Pliki nagłówkowe\ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureComponent.h">
-      <Filter>Pliki nagłówkowe\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicComponent.h">
-      <Filter>Pliki nagłówkowe\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshComponent.h">
-      <Filter>Pliki nagłówkowe\ECS\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="LightComponent.h">
-      <Filter>Pliki nagłówkowe\ECS\Components</Filter>
+    <ClInclude Include="ComponentArray.h">
+      <Filter>Pliki nagłówkowe\NEW\Core</Filter>
     </ClInclude>
     <ClInclude Include="ComponentManager.h">
-      <Filter>Pliki nagłówkowe\ECS</Filter>
+      <Filter>Pliki nagłówkowe\NEW\Core</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicSystem.h">
-      <Filter>Pliki nagłówkowe\ECS\Systems</Filter>
+    <ClInclude Include="Coordinator.h">
+      <Filter>Pliki nagłówkowe\NEW\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Pliki nagłówkowe\NEW\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Pliki nagłówkowe\NEW\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Pliki nagłówkowe\NEW\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>Pliki nagłówkowe\NEW\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManager.h">
+      <Filter>Pliki nagłówkowe\NEW\Core</Filter>
     </ClInclude>
     <ClInclude Include="Types.h">
-      <Filter>Pliki nagłówkowe\ECS</Filter>
+      <Filter>Pliki nagłówkowe\NEW\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraControlSystem.h">
+      <Filter>Pliki nagłówkowe\NEW\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSystem.h">
+      <Filter>Pliki nagłówkowe\NEW\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerControlSystem.h">
+      <Filter>Pliki nagłówkowe\NEW\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>Pliki nagłówkowe\NEW\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Pliki nagłówkowe\NEW\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Gravity.h">
+      <Filter>Pliki nagłówkowe\NEW\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderable.h">
+      <Filter>Pliki nagłówkowe\NEW\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>Pliki nagłówkowe\NEW\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Thrust.h">
+      <Filter>Pliki nagłówkowe\NEW\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Pliki nagłówkowe\NEW\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowManager.h">
+      <Filter>Pliki nagłówkowe\NEW\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Pliki nagłówkowe\NEW\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="UiSystem.h">
+      <Filter>Pliki nagłówkowe\NEW\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicInfo.h">
+      <Filter>Pliki nagłówkowe\NEW\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Pliki nagłówkowe\NEW\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticMesh.h">
+      <Filter>Pliki nagłówkowe\NEW\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,22 +1,30 @@
 #include "PropertyPanel.h"
-#include "AssetManager.h"
+
+#include "Coordinator.h"
+
 
 
 void PropertyPanel::Render(SceneView* scene_view)
 {
-    auto models = AssetManager::GetInstance()->GetModels();
+    Coordinator* coordinator = Coordinator::GetCoordinator();
 
     ImGui::Begin("Properties");
-    if (ImGui::CollapsingHeader("Mesh", ImGuiTreeNodeFlags_DefaultOpen))
-    {
-        ImGui::SameLine(0, 5.0f);
-        ImGui::Text("mCurrentFile.c_str()");
-    }
-
     if (ImGui::CollapsingHeader("Objects"))
     {
-        for (int i = 0; i < models.size(); i++) {
-            models[i]->GenerateGUIElements(i);
+        ImGui::Indent();
+        for (int entity = 1; entity < coordinator->GetEntitiesAmount(); entity++)
+        {
+            std::string label = "Entity: ##" + std::to_string(entity);
+            if (ImGui::CollapsingHeader(label.c_str()))
+            {
+                ImGui::Text(label.c_str());
+                
+                std::string label = "Components: ##" + std::to_string(entity);
+                if (ImGui::CollapsingHeader(label.c_str()))
+                {
+                    coordinator->GetComponent<Transform>(entity).GenerateGUIElements(entity);
+                }
+            }
         }
     }
 

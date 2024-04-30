@@ -1,5 +1,6 @@
 #pragma once
-#include "Component.h"
+
+#include "ComponentArray.h"
 #include "Types.h"
 #include <any>
 #include <memory>

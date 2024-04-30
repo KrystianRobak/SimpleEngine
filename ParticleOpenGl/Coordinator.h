@@ -1,6 +1,8 @@
 #pragma once
+
 #include "ComponentManager.h"
 #include "EntityManager.h"
+#include "EventManager.h"
 #include "SystemManager.h"
 #include "Types.h"
 #include <memory>
@@ -9,10 +11,20 @@
 class Coordinator
 {
 public:
+	static Coordinator* GetCoordinator() 
+	{
+		if (instance == nullptr)
+		{
+			instance = new Coordinator;
+		}
+		return instance;
+	}
+
 	void Init()
 	{
 		mComponentManager = std::make_unique<ComponentManager>();
 		mEntityManager = std::make_unique<EntityManager>();
+		mEventManager = std::make_unique<EventManager>();
 		mSystemManager = std::make_unique<SystemManager>();
 	}
 
@@ -30,6 +42,11 @@ public:
 		mComponentManager->EntityDestroyed(entity);
 
 		mSystemManager->EntityDestroyed(entity);
+	}
+
+	std::uint32_t GetEntitiesAmount()
+	{
+		return mEntityManager->GetEntityCount();
 	}
 
 
@@ -70,6 +87,11 @@ public:
 		return mComponentManager->GetComponent<T>(entity);
 	}
 
+	Signature GetEntitySignature(Entity entity)
+	{
+		return mEntityManager->GetSignature(entity);
+	}
+
 	template<typename T>
 	ComponentType GetComponentType()
 	{
@@ -85,13 +107,40 @@ public:
 	}
 
 	template<typename T>
+	std::shared_ptr<T> GetSystem()
+	{
+		return mSystemManager->GetSystem<T>();
+	}
+
+
+	template<typename T>
 	void SetSystemSignature(Signature signature)
 	{
 		mSystemManager->SetSignature<T>(signature);
 	}
 
+
+	// Event methods
+	void AddEventListener(EventId eventId, std::function<void(Event&)> const& listener)
+	{
+		mEventManager->AddListener(eventId, listener);
+	}
+
+	void SendEvent(Event& event)
+	{
+		mEventManager->SendEvent(event);
+	}
+
+	void SendEvent(EventId eventId)
+	{
+		mEventManager->SendEvent(eventId);
+	}
+
 private:
 	std::unique_ptr<ComponentManager> mComponentManager;
 	std::unique_ptr<EntityManager> mEntityManager;
+	std::unique_ptr<EventManager> mEventManager;
 	std::unique_ptr<SystemManager> mSystemManager;
+
+	static Coordinator* instance;
 };

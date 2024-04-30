@@ -1,9 +1,11 @@
 #pragma once
+
 #include "System.h"
 #include "Types.h"
 #include <cassert>
 #include <memory>
 #include <unordered_map>
+
 
 
 class SystemManager
@@ -19,6 +21,20 @@ public:
 		auto system = std::make_shared<T>();
 		mSystems.insert({ typeName, system });
 		return system;
+	}
+
+	template<typename T>
+	std::shared_ptr<T> GetSystem()
+	{
+		const char* typeName = typeid(T).name();
+		auto it = mSystems.find(typeName);
+		if (it != mSystems.end()) {
+			// Convert the shared_ptr<void> to the correct type
+			return std::static_pointer_cast<T>(it->second);
+		}
+		else {
+			return nullptr;
+		}
 	}
 
 	template<typename T>
@@ -65,5 +81,3 @@ private:
 	std::unordered_map<const char*, Signature> mSignatures{};
 	std::unordered_map<const char*, std::shared_ptr<System>> mSystems{};
 };
-
-

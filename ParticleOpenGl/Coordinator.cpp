@@ -1,1 +1,3 @@
-#include "Coordinator.h"
+#include "coordinator.h"
+
+Coordinator* Coordinator::instance = nullptr;

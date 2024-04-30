@@ -1,4 +1,4 @@
-#include "Model.h"
+#include "StaticMesh.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
@@ -44,7 +44,7 @@ unsigned int TextureFromFile(const char* path, const std::string& directory, boo
 	return textureID;
 }
 
-std::vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
+std::vector<Texture> StaticMesh::loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
 {
 	std::vector<Texture> textures;
 	for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
@@ -74,24 +74,13 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType 
 	return textures;
 }
 
-void Model::Draw(Shader& shader, glm::mat4 projection, glm::mat4 view)
+void StaticMesh::Draw(Shader & shader)
 {
 	for (unsigned int i = 0; i < meshes.size(); i++)
 		meshes[i].Draw(shader);
-    
-    glm::mat4 transformedModel = glm::translate(model, glm::vec3(position[0], position[1], position[2]));
-    glm::mat4 rotatedModel = glm::rotate(transformedModel, glm::radians(angle), glm::vec3(axis[0], axis[1], axis[2]));
-
-    shader.SetBool("useLightning", false);
-    shader.SetBool("useTexture", false);
-
-    shader.SetMat4("projection", projection);
-    shader.SetMat4("view", view);
-    shader.SetMat4("model", rotatedModel);
-    shader.SetVec4("color", { color[0], color[1], color[2], color[3] });
 }
 
-void Model::loadModel(std::string const& path)
+void StaticMesh::loadModel(std::string const& path)
 {
     // read file via ASSIMP
     Assimp::Importer importer;
@@ -109,7 +98,7 @@ void Model::loadModel(std::string const& path)
     processNode(scene->mRootNode, scene);
 }
 
-void Model::processNode(aiNode* node, const aiScene* scene)
+void StaticMesh::processNode(aiNode* node, const aiScene* scene)
 {
     // process each mesh located at the current node
     for (unsigned int i = 0; i < node->mNumMeshes; i++)
@@ -125,7 +114,7 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 }
 
 
-Mesh Model::processMesh(aiMesh * mesh, const aiScene * scene)
+Mesh StaticMesh::processMesh(aiMesh * mesh, const aiScene * scene)
 {
     // data to fill
     std::vector<Vertex> vertices;
@@ -208,53 +197,3 @@ Mesh Model::processMesh(aiMesh * mesh, const aiScene * scene)
     // return a mesh object created from the extracted mesh data
     return Mesh(vertices, indices, textures);
 }
-
-void Model::GenerateGUIElements(int index)
-{
-    // Begin the collapsing header with a unique ID
-    if (ImGui::CollapsingHeader((name + std::to_string(index)).c_str()))
-    {
-        // Get the current cursor position
-        ImVec2 pos = ImGui::GetCursorPos();
-
-        // Calculate the position for the "Delete" button
-        float buttonX = pos.x + ImGui::GetWindowContentRegionMax().x - ImGui::GetFrameHeight();
-        ImVec2 buttonPos(buttonX, pos.y);
-
-        // Add the "Delete" button
-        std::string label = "Delete" + name;
-        if (ImGui::Button(label.c_str(), ImVec2(-1, 0)))
-        {
-            toDelete = true;
-        }
-
-        // Move the cursor to the next line
-        ImGui::NewLine();
-
-        // Proceed with other GUI elements as before
-        label = "Position " + name + std::to_string(index);
-        ImGui::SliderFloat3(label.c_str(), position, -15.f, 15.f);
-
-        ImGui::BeginGroup();
-        label = "AxisX" + name + std::to_string(index);
-        ImGui::Checkbox(label.c_str(), &axis[0]);
-        label = "AxisY" + name + std::to_string(index);
-        ImGui::Checkbox(label.c_str(), &axis[1]);
-        label = "AxisZ" + name + std::to_string(index);
-        ImGui::EndGroup();
-
-        label = "Angle " + name + std::to_string(index);
-        ImGui::SliderFloat(label.c_str(), &angle, 0.f, 360.f);
-
-        ImGui::BeginGroup();
-        label = "Texture" + name + std::to_string(index);
-        ImGui::Checkbox(label.c_str(), &texture);
-        label = "Lightning" + name + std::to_string(index);
-        ImGui::Checkbox(label.c_str(), &lightning);
-        label = "Color Picker" + name + std::to_string(index);
-        ImGui::ColorPicker4(label.c_str(), color, ImGuiColorEditFlags_PickerHueWheel | ImGuiColorEditFlags_DisplayRGB);
-        ImGui::EndGroup();
-    }
-}
-
-
