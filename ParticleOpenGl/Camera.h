@@ -1,6 +1,6 @@
 #pragma once
 
-#include <../glm.hpp>
+#include <glm.hpp>
 #include <cmath>
 
 #define myPi 3.14159265358979323846264338327950288
