@@ -1,10 +1,11 @@
 #include "Application.h"
+#include "StaticMesh.h"
 
 void Application::Init()
 {
 	Coordinator* coordinator = Coordinator::GetCoordinator();
 
-	coordinator->RegisterComponent<Camera>();
+	coordinator->RegisterComponent<Camera>();	
 	coordinator->RegisterComponent<Gravity>();
 	coordinator->RegisterComponent<Player>();
 	coordinator->RegisterComponent<Renderable>();
@@ -12,6 +13,7 @@ void Application::Init()
 	coordinator->RegisterComponent<Thrust>();
 	coordinator->RegisterComponent<Transform>();
 	coordinator->RegisterComponent<CollisionSphere>();
+	coordinator->RegisterComponent<StaticMesh>();
 
 
 	auto physicsSystem = coordinator->RegisterSystem<PhysicsSystem>();
@@ -54,6 +56,7 @@ void Application::Init()
 		Signature signature;
 		signature.set(coordinator->GetComponentType<Renderable>());
 		signature.set(coordinator->GetComponentType<Transform>());
+		
 		coordinator->SetSystemSignature<RenderSystem>(signature);
 	}
 

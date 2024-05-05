@@ -34,114 +34,6 @@ void RenderSystem::Init()
 		Camera{
 			
 		});
-
-	float vertices[] = {
-		-0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f, -0.5f,
-		 0.5f,  0.5f, -0.5f,
-		 0.5f,  0.5f, -0.5f,
-		-0.5f,  0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-
-		-0.5f, -0.5f,  0.5f,
-		 0.5f, -0.5f,  0.5f,
-		 0.5f,  0.5f,  0.5f,
-		 0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-		-0.5f, -0.5f,  0.5f,
-
-		-0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
-		-0.5f, -0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-
-		 0.5f,  0.5f,  0.5f,
-		 0.5f,  0.5f, -0.5f,
-		 0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f,  0.5f,
-		 0.5f,  0.5f,  0.5f,
-
-		-0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f, -0.5f,
-		 0.5f, -0.5f,  0.5f,
-		 0.5f, -0.5f,  0.5f,
-		-0.5f, -0.5f,  0.5f,
-		-0.5f, -0.5f, -0.5f,
-
-		-0.5f,  0.5f, -0.5f,
-		 0.5f,  0.5f, -0.5f,
-		 0.5f,  0.5f,  0.5f,
-		 0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-		-0.5f,  0.5f, -0.5f,
-	};
-
-	float normals[] = {
-		// Front face
-		0.0f, 0.0f, -1.0f,
-		0.0f, 0.0f, -1.0f,
-		0.0f, 0.0f, -1.0f,
-		0.0f, 0.0f, -1.0f,
-		0.0f, 0.0f, -1.0f,
-		0.0f, 0.0f, -1.0f,
-		// Back face
-		0.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f,
-		// Left face
-		-1.0f, 0.0f, 0.0f,
-		-1.0f, 0.0f, 0.0f,
-		-1.0f, 0.0f, 0.0f,
-		-1.0f, 0.0f, 0.0f,
-		-1.0f, 0.0f, 0.0f,
-		-1.0f, 0.0f, 0.0f,
-		// Right face
-		1.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
-		// Bottom face
-		0.0f, -1.0f, 0.0f,
-		0.0f, -1.0f, 0.0f,
-		0.0f, -1.0f, 0.0f,
-		0.0f, -1.0f, 0.0f,
-		0.0f, -1.0f, 0.0f,
-		0.0f, -1.0f, 0.0f,
-		// Top face
-		0.0f, 1.0f, 0.0f,
-		0.0f, 1.0f, 0.0f,
-		0.0f, 1.0f, 0.0f,
-		0.0f, 1.0f, 0.0f,
-		0.0f, 1.0f, 0.0f,
-		0.0f, 1.0f, 0.0f
-	};
-
-	glGenVertexArrays(1, &mVao);
-	glBindVertexArray(mVao);
-
-	// Vertices
-	glGenBuffers(1, &mVboVertices);
-	glBindBuffer(GL_ARRAY_BUFFER, mVboVertices);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-
-	// Normals
-	glGenBuffers(1, &mVboNormals);
-	glBindBuffer(GL_ARRAY_BUFFER, mVboNormals);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(normals), normals, GL_STATIC_DRAW);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(1);
-
-	glBindVertexArray(0);
 }
 
 void RenderSystem::Update(float dt)
@@ -165,33 +57,36 @@ void RenderSystem::Update(float dt)
 	glm::mat4 view = glm::lookAt(camera.cameraPos, camera.cameraPos + camera.cameraFront, camera.cameraUp);
 	shader->SetMat4("View", view);
 
+	auto const& componentTypes = coordinator->GetComponentsTypes();
+
 	for (auto const& entity : mEntities)
 	{
 		auto const& transform = coordinator->GetComponent<Transform>(entity);
 		auto const& renderable = coordinator->GetComponent<Renderable>(entity);
-
+		
 		auto signature = coordinator->GetEntitySignature(entity);
 
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, transform.position);
 		model = glm::rotate(model, 20.f, transform.rotation);
 
+		shader->SetMat4("Model", model);
+		shader->SetVec3("Color", renderable.color);
+
 		if (signature.test(coordinator->GetComponentType<StaticMesh>()))
 		{
 			auto& staticMesh = coordinator->GetComponent<StaticMesh>(entity);
 			staticMesh.Draw(*shader.get());
 		}
-		else
-		{
-			glm::mat4 scaleMat = glm::scale(glm::mat4(1.0f), transform.scale);
+		
+		glm::mat4 scaleMat = glm::scale(glm::mat4(1.0f), transform.scale);
 
-			model = model * scaleMat;
+		model = model * scaleMat;
 
-			shader->SetMat4("Model", model);
-			shader->SetVec3("Color", renderable.color);
 
-			glDrawArrays(GL_TRIANGLES, 0, 36);
-		}
+
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		
 	}
 
 	glBindVertexArray(0);

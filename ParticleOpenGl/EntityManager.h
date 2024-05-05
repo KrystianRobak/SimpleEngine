@@ -55,8 +55,18 @@ public:
 		return mLivingEntityCount;
 	}
 
+	void SetSelectedEntity(std::uint32_t entity) 
+	{
+		this->selectedEntity = entity;
+	}
+
+	std::uint32_t GetSelectedEntity() {
+		return this->selectedEntity;
+	}
+
 private:
 	std::queue<Entity> mAvailableEntities{};
 	std::array<Signature, MAX_ENTITIES> mSignatures{};
 	std::uint32_t mLivingEntityCount{};
+	std::uint32_t selectedEntity;
 };

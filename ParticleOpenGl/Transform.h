@@ -12,15 +12,16 @@ struct Transform
 
     void GenerateGUIElements(std::uint32_t entity)
     {
-        std::string label = "Object##" + entity;
-        if (ImGui::CollapsingHeader(label.c_str()))
-        {
+        std::string label = "Transform##" + entity;
+        ImGui::Text(label.c_str());
+        //if (ImGui::CollapsingHeader(label.c_str()))
+        //{
             label = "Position## " + entity;
             ImGui::SliderFloat3(label.c_str(), &position[0], -15.f, 15.f);
             label = "Rotation## " + entity;
-            ImGui::SliderFloat3(label.c_str(), &rotation[0], -15.f, 15.f);
+            ImGui::SliderFloat3(label.c_str(), &rotation[0], 0.f, 1.f);
             label = "Scale## " + entity;
             ImGui::SliderFloat3(label.c_str(), &scale[0] , -15.f, 15.f);
-        }
+        //}
     }
 };

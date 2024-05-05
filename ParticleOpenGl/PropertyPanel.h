@@ -1,8 +1,10 @@
 #pragma once
 
-#include "SceneView.h"
-
 #include "UIComponent.h"
+
+#include "Coordinator.h"
+#include "StaticMesh.h"
+#include "Transform.h"
 
 class PropertyPanel
 {
@@ -12,7 +14,7 @@ public:
     {
     }
 
-    void Render(SceneView* mScene);
+    void Render();
 
 
 private:

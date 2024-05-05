@@ -12,6 +12,7 @@ bool Window::Init(int width, int height, const std::string& title)
     propertyPanel = std::make_unique<PropertyPanel>();
     sceneView = std::make_unique<SceneView>();
     fileBrowser = std::make_unique<FileBrowser>();
+    itemsSelectionPanel = std::make_unique<ItemsSelectionPanel>();
    
     return mIsRunning;
 }
@@ -49,7 +50,9 @@ void Window::Render()
 
     sceneView->Render();
 
-    propertyPanel->Render(sceneView.get());
+    propertyPanel->Render();
+
+    itemsSelectionPanel->Render();
 
     fileBrowser->Render();
 

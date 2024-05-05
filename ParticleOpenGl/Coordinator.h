@@ -49,6 +49,14 @@ public:
 		return mEntityManager->GetEntityCount();
 	}
 
+	void SetSelectedEntity(std::uint32_t entity) {
+		this->mEntityManager->SetSelectedEntity(entity);
+	}
+
+	std::uint32_t GetSelectedEntity() {
+		return this->mEntityManager->GetSelectedEntity();
+	}
+
 
 	// Component methods
 	template<typename T>
@@ -96,6 +104,11 @@ public:
 	ComponentType GetComponentType()
 	{
 		return mComponentManager->GetComponentType<T>();
+	}
+
+	std::unordered_map<const char*, ComponentType> GetComponentsTypes()
+	{
+		return mComponentManager->GetComponentsTypes();
 	}
 
 

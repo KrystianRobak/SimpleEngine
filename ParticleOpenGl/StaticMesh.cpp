@@ -83,6 +83,10 @@ void StaticMesh::Draw(Shader & shader)
 void StaticMesh::loadModel(std::string const& path)
 {
     // read file via ASSIMP
+    this->meshes.clear();
+
+
+
     Assimp::Importer importer;
     const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
     // check for errors

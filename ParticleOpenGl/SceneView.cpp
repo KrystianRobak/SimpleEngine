@@ -6,7 +6,7 @@
 #include "SceneView.h"
 
 
-std::vector<std::string> splitString(const std::string& str, char delimiter) {
+inline std::vector<std::string> splitString(const std::string& str, char delimiter) {
     std::vector<std::string> tokens;
     std::istringstream iss(str);
     std::string token;
@@ -56,38 +56,6 @@ void SceneView::Render()
                     Coordinator* coordinator = Coordinator::GetCoordinator();
 
                     Entity entity = coordinator->CreateEntity();
-
-                    coordinator->AddComponent(
-                        entity,
-                        Transform{
-                            .position = glm::vec3(1, 1, -30),
-                            .rotation = glm::vec3(0, 0.1, 0),
-                            .scale = glm::vec3(3, 3, 3)
-                        });
-
-                    coordinator->AddComponent(
-                        entity,
-                        Renderable{
-                            .color = glm::vec4(40,40,40, 1)
-                        });
-
-                    coordinator->AddComponent<Gravity>(
-                        entity,
-                        { glm::vec3(0.0f, -3, 0.0f) });
-
-                    coordinator->AddComponent(
-                        entity,
-                        RigidBody{
-                            .velocity = glm::vec3(0.0f, 0.0f, 0.0f),
-                            .acceleration = glm::vec3(0.0f, 0.0f, 0.0f)
-                        });
-
-                    coordinator->AddComponent(
-                        entity,
-                        CollisionSphere{
-                            .centerPoint = glm::vec3(1,1,-30),
-                            .radius = 1
-                        });
                 }
             }
         } 

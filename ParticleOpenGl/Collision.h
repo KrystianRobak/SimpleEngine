@@ -9,8 +9,6 @@ struct CollisionPlane
 
 };
 
-
-
 struct CollisionBox
 {
     glm::vec3 vecMax;

@@ -11,9 +11,9 @@
 struct StaticMesh
 {
 public:
-    StaticMesh(std::string const& path, bool gamma = false) : gammaCorrection(gamma)
+    StaticMesh(bool gamma = false) : gammaCorrection(gamma)
     {
-        loadModel(path);
+        
     }
     void Draw(Shader& shader);
 
@@ -22,7 +22,7 @@ public:
     void processNode(aiNode* node, const aiScene* scene);
     Mesh processMesh(aiMesh* mesh, const aiScene* scene);
 
-  
+private:
     // model data
     std::vector<Mesh> meshes;
     std::string directory;
