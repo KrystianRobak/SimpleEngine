@@ -1,25 +1,60 @@
 #pragma once
 
 #include <glm.hpp>
+#include <vector>
 
-
-
-struct CollisionPlane
+struct CollisionPlane : CollisionMesh
 {
 
 };
 
-struct CollisionBox
+struct CollisionBox : CollisionMesh
 {
     glm::vec3 vecMax;
     glm::vec3 vecMin;
 };
 
-struct CollisionSphere
+struct CollisionSphere : CollisionMesh
 {
     glm::vec3 centerPoint;
     float radius;
 };
+
+const std::vector<const char* const> meshes = {"CollisionBox","CollisionSphere", "CollisionPlane"};
+const char* current_item = NULL;
+
+struct Collider
+{
+    CollisionMesh aa;
+
+    void GenerateGUIElements(std::uint32_t entity)
+    {
+        std::string label = "Object##" + entity;
+
+        label = "Gravity## " + entity;
+
+        if (ImGui::BeginCombo("##Meshes", current_item)) // The second parameter is the label previewed before opening the combo.
+        {
+            for (int n = 0; n < meshes.size(); n++)
+            {
+                bool is_selected = (current_item == meshes[n]); // You can store your selection however you want, outside or inside your objects
+                if (ImGui::Selectable(meshes[n], is_selected))
+                    current_item = meshes[n];
+                    if (is_selected)
+                        ImGui::SetItemDefaultFocus();   // You may set the initial focus when opening the combo (scrolling + for keyboard navigation support)
+            }
+            ImGui::EndCombo();
+        }
+    }
+};
+
+struct CollisionMesh
+{
+};
+
+
+
+
 
 static bool MyAABBtoAABB(const CollisionBox& box1, const CollisionBox& box2);
 static bool MySphereToSphere(const CollisionSphere& tSph1, const CollisionSphere& tSph2);
