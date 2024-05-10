@@ -10,6 +10,7 @@
 #include <gtc/type_ptr.hpp>
 #include <cmath>
 #include "StaticMesh.h"
+#include "Collision.h"
 
 
 
@@ -63,7 +64,7 @@ void RenderSystem::Update(float dt)
 	{
 		auto const& transform = coordinator->GetComponent<Transform>(entity);
 		auto const& renderable = coordinator->GetComponent<Renderable>(entity);
-		
+		auto const& collider = coordinator->GetComponent<Collider>(entity);
 		auto signature = coordinator->GetEntitySignature(entity);
 
 		glm::mat4 model = glm::mat4(1.0f);
@@ -82,8 +83,8 @@ void RenderSystem::Update(float dt)
 		glm::mat4 scaleMat = glm::scale(glm::mat4(1.0f), transform.scale);
 
 		model = model * scaleMat;
-
-
+		
+		//collider.collider->DrawCollisionMesh();
 
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		

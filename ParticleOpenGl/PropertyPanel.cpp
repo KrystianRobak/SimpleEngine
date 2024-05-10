@@ -85,15 +85,13 @@ void RenderComponentsMenu(std::int32_t& entity, std::bitset<32>& signature)
                     });
             }
         }
-        if (!signature.test(coordinator->GetComponentType<CollisionSphere>()))
+        if (!signature.test(coordinator->GetComponentType<Collider>()))
         {
             if (ImGui::Button("Collision"))
             {
                 coordinator->AddComponent(
                     entity,
-                    CollisionSphere{
-                        .centerPoint = glm::vec3(1,1,-30),
-                        .radius = 1
+                    Collider{
                     });
             }
         }
@@ -143,11 +141,11 @@ void RenderComponentsMenu(std::int32_t& entity, std::bitset<32>& signature)
                 coordinator->RemoveComponent<StaticMesh>(entity);
             }
         }
-        if (signature.test(coordinator->GetComponentType<CollisionSphere>()))
+        if (signature.test(coordinator->GetComponentType<Collider>()))
         {
             if (ImGui::Button("Collision"))
             {
-                coordinator->RemoveComponent<CollisionSphere>(entity);
+                coordinator->RemoveComponent<Collider>(entity);
             }
         }
 
@@ -190,6 +188,11 @@ void PropertyPanel::Render()
     if (signature.test(coordinator->GetComponentType<RigidBody>()))
     {
         coordinator->GetComponent<RigidBody>(entity).GenerateGUIElements(entity);
+    }
+
+    if (signature.test(coordinator->GetComponentType<Collider>()))
+    {
+        coordinator->GetComponent<Collider>(entity).GenerateGUIElements(entity);
     }
 
     ImGui::Text(label.c_str());

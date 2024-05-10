@@ -7,6 +7,8 @@
 #include "Transform.h"
 #include "Collision.h"
 #include "coordinator.h"
+#include "Renderable.h"
+#include <memory>
 
 void PhysicsSystem::Init()
 {
@@ -16,24 +18,36 @@ void PhysicsSystem::Update(float dt)
 {
 	Coordinator* coordinator = Coordinator::GetCoordinator();
 
-	for (auto const& entity : mEntities)
+	for (auto const& entityA : mEntities)
 	{
-		for (auto const& entity2 : mEntities)
+		for (auto const& entityB : mEntities)
 		{
-			if (entity == entity2)
-				continue;
-			std::cout << MySphereToSphere(coordinator->GetComponent<CollisionSphere>(entity), coordinator->GetComponent<CollisionSphere>(entity2)) << std::endl;
+			if (entityA != entityB)
+			{
+				std::shared_ptr<Collider> colliderA = std::make_shared<Collider>(coordinator->GetComponent<Collider>(entityA));
+				std::shared_ptr<Collider> colliderB = std::make_shared<Collider>(coordinator->GetComponent<Collider>(entityB));
+
+
+				if (colliderA->collider->CollisionHandling(colliderB->collider))
+				{
+					auto& renderableA = coordinator->GetComponent<Renderable>(entityA);
+					auto& renderableB = coordinator->GetComponent<Renderable>(entityB);
+
+					renderableA.color = { 50, 0, 0 ,1 };
+					renderableB.color = { 50, 0, 0 ,1 };
+
+					std::cout << "Hitted" << std::endl;
+				}
+				
+				//colliderA->collider->DrawCollisionMesh();
+			}
 		}
-
-		auto& rigidBody = coordinator->GetComponent<RigidBody>(entity);
-		auto& transform = coordinator->GetComponent<Transform>(entity);
-
-		if (entity == 3)
-			std::cout << transform.position[1];
+		auto& rigidBody = coordinator->GetComponent<RigidBody>(entityA);
+		auto& transform = coordinator->GetComponent<Transform>(entityA);
 		// Forces
-		auto const& gravity = coordinator->GetComponent<Gravity>(entity);
+		auto const& gravity = coordinator->GetComponent<Gravity>(entityA);
 
-		transform.position += rigidBody.velocity * dt;
+		transform.position += rigidBody.velocity * dt * 10.f;
 
 		rigidBody.velocity += gravity.force * dt;
 	}

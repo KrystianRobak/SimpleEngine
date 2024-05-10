@@ -12,7 +12,7 @@ void Application::Init()
 	coordinator->RegisterComponent<RigidBody>();
 	coordinator->RegisterComponent<Thrust>();
 	coordinator->RegisterComponent<Transform>();
-	coordinator->RegisterComponent<CollisionSphere>();
+	coordinator->RegisterComponent<Collider>();
 	coordinator->RegisterComponent<StaticMesh>();
 
 
@@ -22,7 +22,7 @@ void Application::Init()
 		signature.set(coordinator->GetComponentType<Gravity>());
 		signature.set(coordinator->GetComponentType<RigidBody>());
 		signature.set(coordinator->GetComponentType<Transform>());
-		signature.set(coordinator->GetComponentType<CollisionSphere>());
+		signature.set(coordinator->GetComponentType<Collider>());
 		coordinator->SetSystemSignature<PhysicsSystem>(signature);
 	}
 
@@ -56,7 +56,8 @@ void Application::Init()
 		Signature signature;
 		signature.set(coordinator->GetComponentType<Renderable>());
 		signature.set(coordinator->GetComponentType<Transform>());
-		
+		signature.set(coordinator->GetComponentType<Collider>());
+
 		coordinator->SetSystemSignature<RenderSystem>(signature);
 	}
 

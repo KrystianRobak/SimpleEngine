@@ -1,92 +1,222 @@
 #pragma once
 
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 #include <glm.hpp>
+#include "Coordinator.h"
+#include "Transform.h"
 #include <vector>
+#include <array>
 
-struct CollisionPlane : CollisionMesh
+class CollisionSphere;
+class CollisionPlane;
+class CollisionBox;
+
+enum ColliderType
 {
-
+    Sphere,
+    Plane,
+    Box
 };
 
-struct CollisionBox : CollisionMesh
+class CollisionMesh
 {
-    glm::vec3 vecMax;
-    glm::vec3 vecMin;
-};
+public:
+    virtual ~CollisionMesh() {}
 
-struct CollisionSphere : CollisionMesh
-{
-    glm::vec3 centerPoint;
-    float radius;
-};
+    virtual bool CollisionHandling(CollisionMesh* collider) = 0;
 
-const std::vector<const char* const> meshes = {"CollisionBox","CollisionSphere", "CollisionPlane"};
-const char* current_item = NULL;
-
-struct Collider
-{
-    CollisionMesh aa;
-
-    void GenerateGUIElements(std::uint32_t entity)
+    virtual glm::vec3 FindFurthestPoint(glm::vec3 direction) const
     {
-        std::string label = "Object##" + entity;
+        glm::vec3 maxPoint;
+        float maxDistance = -FLT_MAX;
 
-        label = "Gravity## " + entity;
-
-        if (ImGui::BeginCombo("##Meshes", current_item)) // The second parameter is the label previewed before opening the combo.
+        for (glm::vec3 vertex : vertices)
         {
-            for (int n = 0; n < meshes.size(); n++)
+            float distance = glm::dot<3, float, glm::qualifier::highp>(vertex, direction);
+            if (distance > maxDistance)
             {
-                bool is_selected = (current_item == meshes[n]); // You can store your selection however you want, outside or inside your objects
-                if (ImGui::Selectable(meshes[n], is_selected))
-                    current_item = meshes[n];
-                    if (is_selected)
-                        ImGui::SetItemDefaultFocus();   // You may set the initial focus when opening the combo (scrolling + for keyboard navigation support)
+                maxDistance = distance;
+                maxPoint = vertex;
             }
-            ImGui::EndCombo();
         }
+
+        return maxPoint;
+    }
+
+    std::vector<glm::vec3> vertices;
+    ColliderType colliderType;
+};
+
+class CollisionPlane : public CollisionMesh
+{
+public:
+    glm::vec3 plane;
+    float distance;
+
+    bool CollisionHandling(CollisionMesh* collider) override
+    {
+        // Dynamic cast to check the actual type of the collider
+        if (auto planeCollider = dynamic_cast<CollisionPlane*>(collider)) {
+            // Handle collision between two planes
+            return CollisionHandler(planeCollider);
+        }
+        else if (auto sphereCollider = dynamic_cast<CollisionSphere*>(collider)) {
+            // Handle collision between a plane and a sphere
+            return CollisionHandler(sphereCollider);
+        }
+        else if (auto boxCollider = dynamic_cast<CollisionBox*>(collider)) {
+            // Handle collision between a plane and a box
+            return CollisionHandler(boxCollider);
+        }
+        return false; // Default case: no collision
+    }
+
+    bool CollisionHandler(CollisionPlane* planeCollider)
+    {
+        // Collision handling logic for plane-plane collision
+        return false;
+    }
+
+    bool CollisionHandler(CollisionSphere* sphereCollider)
+    {
+        // Collision handling logic for plane-sphere collision
+        return false;
+    }
+
+    bool CollisionHandler(CollisionBox* boxCollider)
+    {
+        // Collision handling logic for plane-box collision
+        return false;
     }
 };
 
-struct CollisionMesh
+class CollisionBox : public CollisionMesh
 {
+public:
+    glm::vec3 vecMax;
+    glm::vec3 vecMin;
+
+    bool CollisionHandling(CollisionMesh* collider) override
+    {
+        // Dynamic cast to check the actual type of the collider
+        if (auto planeCollider = dynamic_cast<CollisionPlane*>(collider)) {
+            // Handle collision between a box and a plane
+            return CollisionHandler(planeCollider);
+        }
+        else if (auto sphereCollider = dynamic_cast<CollisionSphere*>(collider)) {
+            // Handle collision between a box and a sphere
+            return CollisionHandler(sphereCollider);
+        }
+        else if (auto boxCollider = dynamic_cast<CollisionBox*>(collider)) {
+            // Handle collision between two boxes
+            return CollisionHandler(boxCollider);
+        }
+        return false; // Default case: no collision
+    }
+
+    bool CollisionHandler(CollisionPlane* planeCollider)
+    {
+        // Collision handling logic for box-plane collision
+        return false;
+    }
+
+    bool CollisionHandler(CollisionSphere* sphereCollider)
+    {
+        // Collision handling logic for box-sphere collision
+        return false;
+    }
+
+    bool CollisionHandler(CollisionBox* boxCollider)
+    {
+        // Collision handling logic for box-box collision
+        return false;
+    }
 };
 
-
-
-
-
-static bool MyAABBtoAABB(const CollisionBox& box1, const CollisionBox& box2);
-static bool MySphereToSphere(const CollisionSphere& tSph1, const CollisionSphere& tSph2);
-
-static bool MySphereToSphere(const CollisionSphere& tSph1, const CollisionSphere& tSph2)
+class CollisionSphere : public CollisionMesh
 {
-    // Calculate the squared distance between the centers of both spheres
-    glm::vec3 vecDist = tSph2.centerPoint - tSph1.centerPoint;
-    float fDistSq = glm::dot(vecDist, vecDist);
+public:
+    glm::vec3* centerPoint;
+    float radius;
 
-    // Calculate the squared sum of both radii
-    float fRadiiSumSquared = (tSph1.radius + tSph2.radius) * (tSph1.radius + tSph2.radius);
+    bool CollisionHandling(CollisionMesh* collider) override
+    {
+        // Dynamic cast to check the actual type of the collider
+        
+        if (auto planeCollider = dynamic_cast<CollisionPlane*>(collider)) {
+            // Handle collision between a sphere and a plane
+            return CollisionHandler(planeCollider);
+        }
+        else if (auto sphereCollider = dynamic_cast<CollisionSphere*>(collider)) {
+            // Handle collision between two spheres
+            return CollisionHandler(sphereCollider);
+        }
+        else if (auto boxCollider = dynamic_cast<CollisionBox*>(collider)) {
+            // Handle collision between a sphere and a box
+            return CollisionHandler(boxCollider);
+        }
+        return false; // Default case: no collision
+    }
 
-    // Check for collision
-    // If the distance squared is less than or equal to the square sum
-    // of the radii, then we have a collision
-    if (fDistSq <= fRadiiSumSquared)
-        return true;
+    bool CollisionHandler(CollisionPlane* planeCollider)
+    {
+        // Collision handling logic for sphere-plane collision
+        return false;
+    }
 
-    // If not, then return false
-    return false;
-}
+    bool CollisionHandler(CollisionSphere* sphereCollider)
+    {
+        glm::vec3 distance = *centerPoint - *sphereCollider->centerPoint;
 
+        float distMag = glm::length(distance);
 
+        float sumRadii = radius + sphereCollider->radius;
+        bool isColliding = distMag < sumRadii;
 
+        return isColliding;
+    }
 
-static bool MyAABBtoAABB(const CollisionBox& tBox1, const CollisionBox& tBox2)
+    bool CollisionHandler(CollisionBox* boxCollider)
+    {
+        // Collision handling logic for sphere-box collision
+        return false;
+    }
+};
+
+struct Collider
 {
-    return(tBox1.vecMax.x > tBox2.vecMin.x &&
-        tBox1.vecMin.x < tBox2.vecMax.x &&
-        tBox1.vecMax.y > tBox2.vecMin.y &&
-        tBox1.vecMin.y < tBox2.vecMax.y &&
-        tBox1.vecMax.z > tBox2.vecMin.z &&
-        tBox1.vecMin.z < tBox2.vecMax.z);
-}
+    CollisionMesh* collider;
+
+    void GenerateGUIElements(std::int32_t entity)
+    {
+        std::string label = "CollisionSphere##" + entity;
+        if (ImGui::Button(label.c_str()))
+        {
+            Coordinator* coordinator = Coordinator::GetCoordinator();
+            auto& transform = coordinator->GetComponent<Transform>(entity);
+
+            delete collider;
+            auto colliderSphere = new CollisionSphere;
+            colliderSphere->centerPoint = &transform.position;
+            colliderSphere->radius = 0.5f;
+
+            collider = colliderSphere;
+            collider->colliderType = ColliderType::Sphere;
+        }
+        label = "CollisionBox##" + entity;
+        if (ImGui::Button(label.c_str()))
+        {
+            delete collider;
+            collider = new CollisionBox;
+            collider->colliderType = ColliderType::Box;
+        }
+        label = "CollisionPlane##" + entity;
+        if (ImGui::Button(label.c_str()))
+        {
+            delete collider;
+            collider = new CollisionPlane;
+            collider->colliderType = ColliderType::Plane;
+        }
+    }
+};
