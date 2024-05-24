@@ -139,6 +139,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="CameraControlSystem.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="ComponentArray.cpp" />
     <ClCompile Include="ComponentManager.cpp" />
     <ClCompile Include="Coordinator.cpp" />

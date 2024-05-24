@@ -3,37 +3,43 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm.hpp>
+#include <imgui.h>
 #include "Coordinator.h"
 #include "Transform.h"
 #include <vector>
-#include <array>
+#include <memory>
+#include <limits>
+#include <string>
 
+// Forward declarations
 class CollisionSphere;
 class CollisionPlane;
 class CollisionBox;
 
-enum ColliderType
+enum class CollisionType
 {
-    Sphere,
-    Plane,
-    Box
+    noone,
+    SphereSphere,
+    BoxBox,
+    PlanePlane,
+    SpherePlane,
+    SphereBox,
+    BoxPlane
 };
 
 class CollisionMesh
 {
 public:
-    virtual ~CollisionMesh() {}
+    virtual ~CollisionMesh() = default;
 
-    virtual bool CollisionHandling(CollisionMesh* collider) = 0;
-
-    virtual glm::vec3 FindFurthestPoint(glm::vec3 direction) const
+    virtual glm::vec3 FindFurthestPoint(const glm::vec3& direction) const
     {
         glm::vec3 maxPoint;
-        float maxDistance = -FLT_MAX;
+        float maxDistance = -std::numeric_limits<float>::max();
 
-        for (glm::vec3 vertex : vertices)
+        for (const auto& vertex : vertices)
         {
-            float distance = glm::dot<3, float, glm::qualifier::highp>(vertex, direction);
+            float distance = glm::dot(vertex, direction);
             if (distance > maxDistance)
             {
                 maxDistance = distance;
@@ -45,7 +51,6 @@ public:
     }
 
     std::vector<glm::vec3> vertices;
-    ColliderType colliderType;
 };
 
 class CollisionPlane : public CollisionMesh
@@ -53,42 +58,6 @@ class CollisionPlane : public CollisionMesh
 public:
     glm::vec3 plane;
     float distance;
-
-    bool CollisionHandling(CollisionMesh* collider) override
-    {
-        // Dynamic cast to check the actual type of the collider
-        if (auto planeCollider = dynamic_cast<CollisionPlane*>(collider)) {
-            // Handle collision between two planes
-            return CollisionHandler(planeCollider);
-        }
-        else if (auto sphereCollider = dynamic_cast<CollisionSphere*>(collider)) {
-            // Handle collision between a plane and a sphere
-            return CollisionHandler(sphereCollider);
-        }
-        else if (auto boxCollider = dynamic_cast<CollisionBox*>(collider)) {
-            // Handle collision between a plane and a box
-            return CollisionHandler(boxCollider);
-        }
-        return false; // Default case: no collision
-    }
-
-    bool CollisionHandler(CollisionPlane* planeCollider)
-    {
-        // Collision handling logic for plane-plane collision
-        return false;
-    }
-
-    bool CollisionHandler(CollisionSphere* sphereCollider)
-    {
-        // Collision handling logic for plane-sphere collision
-        return false;
-    }
-
-    bool CollisionHandler(CollisionBox* boxCollider)
-    {
-        // Collision handling logic for plane-box collision
-        return false;
-    }
 };
 
 class CollisionBox : public CollisionMesh
@@ -96,42 +65,6 @@ class CollisionBox : public CollisionMesh
 public:
     glm::vec3 vecMax;
     glm::vec3 vecMin;
-
-    bool CollisionHandling(CollisionMesh* collider) override
-    {
-        // Dynamic cast to check the actual type of the collider
-        if (auto planeCollider = dynamic_cast<CollisionPlane*>(collider)) {
-            // Handle collision between a box and a plane
-            return CollisionHandler(planeCollider);
-        }
-        else if (auto sphereCollider = dynamic_cast<CollisionSphere*>(collider)) {
-            // Handle collision between a box and a sphere
-            return CollisionHandler(sphereCollider);
-        }
-        else if (auto boxCollider = dynamic_cast<CollisionBox*>(collider)) {
-            // Handle collision between two boxes
-            return CollisionHandler(boxCollider);
-        }
-        return false; // Default case: no collision
-    }
-
-    bool CollisionHandler(CollisionPlane* planeCollider)
-    {
-        // Collision handling logic for box-plane collision
-        return false;
-    }
-
-    bool CollisionHandler(CollisionSphere* sphereCollider)
-    {
-        // Collision handling logic for box-sphere collision
-        return false;
-    }
-
-    bool CollisionHandler(CollisionBox* boxCollider)
-    {
-        // Collision handling logic for box-box collision
-        return false;
-    }
 };
 
 class CollisionSphere : public CollisionMesh
@@ -139,84 +72,57 @@ class CollisionSphere : public CollisionMesh
 public:
     glm::vec3* centerPoint;
     float radius;
-
-    bool CollisionHandling(CollisionMesh* collider) override
-    {
-        // Dynamic cast to check the actual type of the collider
-        
-        if (auto planeCollider = dynamic_cast<CollisionPlane*>(collider)) {
-            // Handle collision between a sphere and a plane
-            return CollisionHandler(planeCollider);
-        }
-        else if (auto sphereCollider = dynamic_cast<CollisionSphere*>(collider)) {
-            // Handle collision between two spheres
-            return CollisionHandler(sphereCollider);
-        }
-        else if (auto boxCollider = dynamic_cast<CollisionBox*>(collider)) {
-            // Handle collision between a sphere and a box
-            return CollisionHandler(boxCollider);
-        }
-        return false; // Default case: no collision
-    }
-
-    bool CollisionHandler(CollisionPlane* planeCollider)
-    {
-        // Collision handling logic for sphere-plane collision
-        return false;
-    }
-
-    bool CollisionHandler(CollisionSphere* sphereCollider)
-    {
-        glm::vec3 distance = *centerPoint - *sphereCollider->centerPoint;
-
-        float distMag = glm::length(distance);
-
-        float sumRadii = radius + sphereCollider->radius;
-        bool isColliding = distMag < sumRadii;
-
-        return isColliding;
-    }
-
-    bool CollisionHandler(CollisionBox* boxCollider)
-    {
-        // Collision handling logic for sphere-box collision
-        return false;
-    }
 };
 
-struct Collider
+class Collider
 {
-    CollisionMesh* collider;
-
+public:
     void GenerateGUIElements(std::int32_t entity)
     {
-        std::string label = "CollisionSphere##" + entity;
+        std::string label = "CollisionSphere##" + std::to_string(entity);
         if (ImGui::Button(label.c_str()))
         {
             Coordinator* coordinator = Coordinator::GetCoordinator();
             auto& transform = coordinator->GetComponent<Transform>(entity);
 
-            delete collider;
-            auto colliderSphere = new CollisionSphere;
+            auto colliderSphere = new CollisionSphere();
             colliderSphere->centerPoint = &transform.position;
             colliderSphere->radius = 0.5f;
 
             collider = colliderSphere;
-            collider->colliderType = ColliderType::Sphere;
         }
-        label = "CollisionBox##" + entity;
+        label = "CollisionBox##" + std::to_string(entity);
         if (ImGui::Button(label.c_str()))
         {
-            delete collider;
-            collider = new CollisionBox;
-            collider->colliderType = ColliderType::Box;
+            auto colliderBox = new  CollisionBox();
+            collider = colliderBox;
         }
-        label = "CollisionPlane##" + entity;
+        label = "CollisionPlane##" + std::to_string(entity);
         if (ImGui::Button(label.c_str()))
         {
-            delete collider;
-            collider = new CollisionPlane;
-            collider->colliderType = ColliderType::Plane;
+            auto colliderPlane = new CollisionPlane();
+            collider = colliderPlane;
         }
     }
+
+public:
+    CollisionMesh* collider;
 };
+
+class CollisionHandler {
+public:
+    static std::pair<CollisionType, bool> HandleCollision(CollisionMesh* planeCollider, CollisionMesh* planeCollider2);
+    static std::pair<CollisionType, bool> HandleCollision(CollisionPlane* planeCollider, CollisionPlane* planeCollider2);
+    static std::pair<CollisionType, bool> HandleCollision(CollisionPlane* planeCollider, CollisionSphere* sphereCollider);
+    static std::pair<CollisionType, bool> HandleCollision(CollisionPlane* planeCollider, CollisionBox* boxCollider);
+    static std::pair<CollisionType, bool> HandleCollision(CollisionBox* boxCollider, CollisionSphere* sphereCollider);
+    static std::pair<CollisionType, bool> HandleCollision(CollisionBox* boxCollider, CollisionBox* boxCollider2);
+    static std::pair<CollisionType, bool> HandleCollision(CollisionBox* boxCollider, CollisionPlane* planeCollider);
+    static std::pair<CollisionType, bool> HandleCollision(CollisionSphere* sphereCollider, CollisionSphere* sphereCollider2);
+    static std::pair<CollisionType, bool> HandleCollision(CollisionSphere* sphereCollider, CollisionPlane* planeCollider);
+    static std::pair<CollisionType, bool> HandleCollision(CollisionSphere* sphereCollider, CollisionBox* boxCollider);
+    
+};
+
+
+

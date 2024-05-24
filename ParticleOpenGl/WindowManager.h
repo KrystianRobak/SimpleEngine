@@ -16,7 +16,7 @@ public:
 	void Update();
 	GLFWwindow* GetWindow()
 	{
-		return this->mWindow;
+		return mWindow;
 	}
 
 	void ProcessEvents();

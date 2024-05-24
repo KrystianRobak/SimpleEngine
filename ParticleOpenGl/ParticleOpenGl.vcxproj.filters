@@ -180,6 +180,9 @@
     <ClCompile Include="StaticMesh.cpp">
       <Filter>Pliki źródłowe\NEW\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imgui.h">

@@ -23,7 +23,8 @@ using ComponentType = std::uint8_t;
 const ComponentType MAX_COMPONENTS = 32;
 using Signature = std::bitset<MAX_COMPONENTS>;
 
-
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT = 600;
 // Input
 enum class InputButtons
 {

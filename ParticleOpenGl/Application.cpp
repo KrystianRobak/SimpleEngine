@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "StaticMesh.h"
+#include "thread"
 
 void Application::Init()
 {
@@ -115,20 +116,27 @@ void Application::Update()
 	auto cameraControlSystem = coordinator->GetSystem<CameraControlSystem>();
 	auto physicsSystem = coordinator->GetSystem<PhysicsSystem>();
 
+	const float targetFrameDuration = 1.0f / 165.0f; // 60 FPS
+	auto frameStartTime = std::chrono::high_resolution_clock::now();
 
-	auto startTime = std::chrono::high_resolution_clock::now();
-
+	// Update systems
 	playerControlSystem->Update(dt);
-
 	cameraControlSystem->Update(dt);
-
 	physicsSystem->Update(dt);
 
+	// Calculate the duration of the frame
+	auto frameEndTime = std::chrono::high_resolution_clock::now();
+	dt = std::chrono::duration<float>(frameEndTime - frameStartTime).count();
 
-	auto stopTime = std::chrono::high_resolution_clock::now();
+	float sleepDuration = targetFrameDuration - dt;
+	if (sleepDuration > 0)
+	{
+		std::this_thread::sleep_for(std::chrono::duration<float>(sleepDuration));
+	}
 
-	dt = std::chrono::duration<float, std::chrono::seconds::period>(stopTime - startTime).count();
-
+	// Update dt for the next frame
+	frameEndTime = std::chrono::high_resolution_clock::now();
+	dt = std::chrono::duration<float>(frameEndTime - frameStartTime).count();
 }
 
 void Application::Render()
