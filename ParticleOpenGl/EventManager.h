@@ -1,23 +1,22 @@
 #pragma once
 
-#include "Event.h"
 #include "Types.h"
+#include "Event.h"
 #include <functional>
 #include <list>
 #include <unordered_map>
 
-
 class EventManager
 {
 public:
-	void AddListener(EventId eventId, std::function<void(Event&)> const& listener)
+	void AddListener(EventType eventType, std::function<void(Event&)> const& listener)
 	{
-		listeners[eventId].push_back(listener);
+		listeners[eventType].push_back(listener);
 	}
 
 	void SendEvent(Event& event)
 	{
-		uint32_t type = event.GetType();
+		std::string type = event.GetType();
 
 		for (auto const& listener : listeners[type])
 		{
@@ -25,16 +24,16 @@ public:
 		}
 	}
 
-	void SendEvent(EventId eventId)
+	void SendEvent(EventType eventType)
 	{
-		Event event(eventId);
+		Event event(eventType);
 
-		for (auto const& listener : listeners[eventId])
+		for (auto const& listener : listeners[eventType])
 		{
 			listener(event);
 		}
 	}
 
 private:
-	std::unordered_map<EventId, std::list<std::function<void(Event&)>>> listeners;
+	std::unordered_map<EventType, std::list<std::function<void(Event&)>>> listeners;
 };

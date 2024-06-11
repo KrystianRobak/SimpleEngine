@@ -1,3 +1,12 @@
 #include "coordinator.h"
 
-Coordinator* Coordinator::instance = nullptr;
+std::shared_ptr<Coordinator> Coordinator::instance = nullptr;
+
+
+
+
+
+
+
+
+

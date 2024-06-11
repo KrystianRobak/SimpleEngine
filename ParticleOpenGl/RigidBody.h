@@ -14,14 +14,15 @@ struct RigidBody
 
     void GenerateGUIElements(std::uint32_t entity)
     {
-        std::string label = "Object##" + entity;
+        std::string entityStr = std::to_string(entity);
 
-            label = "Velocity## " + entity;
-            ImGui::SliderFloat3(label.c_str(), &velocity[0], -10.f, 10.f);
-            label = "Mass## " + entity;
-            ImGui::InputFloat(label.c_str(), &mass);
-            label = "Acceleration## " + entity;
-            ImGui::SliderFloat3(label.c_str(), &acceleration[0], -15.f, 15.f);
+        std::string velocityLabel = "Velocity##" + entityStr;
+        ImGui::SliderFloat3(velocityLabel.c_str(), &velocity[0], -20.f, 20.f);
 
+        std::string massLabel = "Mass##" + entityStr;
+        ImGui::InputFloat(massLabel.c_str(), &mass);
+
+        std::string accelerationLabel = "Acceleration##" + entityStr;
+        ImGui::SliderFloat3(accelerationLabel.c_str(), &acceleration[0], -15.f, 15.f);
     }
 };

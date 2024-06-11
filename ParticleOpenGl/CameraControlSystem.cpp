@@ -8,13 +8,13 @@
 
 void CameraControlSystem::Init()
 {
-	Coordinator* coordinator = Coordinator::GetCoordinator();
-	coordinator->AddEventListener(METHOD_LISTENER(Events::Window::INPUT, CameraControlSystem::InputListener));
+	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
+	coordinator->AddEventListener(METHOD_LISTENER_ONE_PARAM(Events::Window::INPUT, CameraControlSystem::InputListener));
 }
 
 void CameraControlSystem::Update(float dt)
 {
-	Coordinator* coordinator = Coordinator::GetCoordinator();
+	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
 	for (auto& entity : mEntities)
 	{
 		auto& transform = coordinator->GetComponent<Transform>(entity);

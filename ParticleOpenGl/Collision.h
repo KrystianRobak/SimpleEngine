@@ -82,7 +82,7 @@ public:
         std::string label = "CollisionSphere##" + std::to_string(entity);
         if (ImGui::Button(label.c_str()))
         {
-            Coordinator* coordinator = Coordinator::GetCoordinator();
+            std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
             auto& transform = coordinator->GetComponent<Transform>(entity);
 
             auto colliderSphere = new CollisionSphere();

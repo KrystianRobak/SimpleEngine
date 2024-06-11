@@ -18,7 +18,7 @@ inline std::vector<std::string> splitString(const std::string& str, char delimit
 
 void RenderComponentsMenu(std::int32_t& entity, std::bitset<32>& signature) 
 {
-    Coordinator* coordinator = Coordinator::GetCoordinator();
+    std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
 
     if (ImGui::CollapsingHeader("Add component"))
     {
@@ -157,7 +157,7 @@ void RenderComponentsMenu(std::int32_t& entity, std::bitset<32>& signature)
 
 void PropertyPanel::Render()
 {
-    Coordinator* coordinator = Coordinator::GetCoordinator();
+    std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
     std::int32_t entity = coordinator->GetSelectedEntity();
     if (!entity)
         return;

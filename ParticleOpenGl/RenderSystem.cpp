@@ -12,13 +12,11 @@
 #include "StaticMesh.h"
 #include "Collision.h"
 
-
-
 void RenderSystem::Init()
 {
-	Coordinator* coordinator = Coordinator::GetCoordinator();
+	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
 
-	coordinator->AddEventListener(METHOD_LISTENER(Events::Window::RESIZED, RenderSystem::WindowSizeListener));
+	coordinator->AddEventListener(METHOD_LISTENER_ONE_PARAM(Events::Window::RESIZED, RenderSystem::WindowSizeListener));
 
 	shader = std::make_unique<Shader>("Default.vs", "Default.fs");
 
@@ -39,7 +37,7 @@ void RenderSystem::Init()
 
 void RenderSystem::Update(float dt)
 {
-	Coordinator* coordinator = Coordinator::GetCoordinator();
+	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
 
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -47,18 +45,18 @@ void RenderSystem::Update(float dt)
 	shader->Use();
 	glBindVertexArray(mVao);
 
-
 	auto& cameraTransform = coordinator->GetComponent<Transform>(mCamera);
 	auto& camera = coordinator->GetComponent<Camera>(mCamera);
 
 	glm::mat4 projection = glm::perspective(glm::radians(camera.fov), 800.f/600.f, 0.1f, 100.0f);
 	shader->SetMat4("Projection", projection);
 
-	// camera/view transformation
 	glm::mat4 view = glm::lookAt(camera.cameraPos, camera.cameraPos + camera.cameraFront, camera.cameraUp);
 	shader->SetMat4("View", view);
 
 	auto const& componentTypes = coordinator->GetComponentsTypes();
+
+
 
 	for (auto const& entity : mEntities)
 	{
@@ -72,7 +70,7 @@ void RenderSystem::Update(float dt)
 		model = glm::rotate(model, 20.f, transform.rotation);
 
 		shader->SetMat4("Model", model);
-		shader->SetVec3("Color", renderable.color);
+		shader->SetVec4("Color", renderable.color);
 
 		if (signature.test(coordinator->GetComponentType<StaticMesh>()))
 		{
@@ -95,11 +93,14 @@ void RenderSystem::Update(float dt)
 
 void RenderSystem::WindowSizeListener(Event& event)
 {
-	Coordinator* coordinator = Coordinator::GetCoordinator();
+	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
 
 	auto windowWidth = event.GetParam<unsigned int>(Events::Window::Resized::WIDTH);
 	auto windowHeight = event.GetParam<unsigned int>(Events::Window::Resized::HEIGHT);
 
 	auto& camera = coordinator->GetComponent<Camera>(mCamera);
 	//camera.projectionTransform = Camera::MakeProjectionTransform(45.0f, 0.1f, 1000.0f, windowWidth, windowHeight);
+
+
 }
+

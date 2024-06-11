@@ -2,12 +2,9 @@
 #include "Window.h"
 #include "Types.h"
 
-
-
-
 int main()
 {
-	Coordinator* coordinator = Coordinator::GetCoordinator();
+	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
 
 	coordinator->Init();
 

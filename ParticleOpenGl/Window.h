@@ -6,20 +6,23 @@
 #include <string>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
 #include "PropertyPanel.h"
 #include "SceneView.h"
 #include "FileBrowser.h"
 #include "ItemsSelectionPanel.h"
+#include "AddingPanel.h"
+#include "ControlPanel.h"
 
 
 class Window : public IWindow
 {
 public:
-    Window() : mIsRunning(true), window(nullptr)
+    Window() : IsRunning(true), window(nullptr), application(nullptr)
     {
-        mUICtx = std::make_unique<UIContext>();
-        mRenderCtx = std::make_unique<OpenGlContext>();
-        
+        UICtx = std::make_unique<UIContext>();
+        RenderCtx = std::make_unique<OpenGlContext>();
+        application = std::make_shared<Application>();
     }
 
     ~Window();
@@ -39,16 +42,17 @@ public:
 
     void on_close();
 
-    bool is_running() { return mIsRunning; }
+    bool is_running() { return IsRunning; }
 
 private:
 
     GLFWwindow* window;
+    std::shared_ptr<Application> application;
 
     // Render contexts
-    std::unique_ptr<UIContext> mUICtx;
+    std::unique_ptr<UIContext> UICtx;
 
-    std::unique_ptr<OpenGlContext> mRenderCtx;
+    std::unique_ptr<OpenGlContext> RenderCtx;
 
     std::unique_ptr<PropertyPanel> propertyPanel;
 
@@ -58,7 +62,11 @@ private:
 
     std::unique_ptr<FileBrowser> fileBrowser;
 
-    bool mIsRunning;
+    std::unique_ptr<AddingPanel> addingPanel;
+
+    std::unique_ptr<ControlPanel> controlPanel;
+
+    bool IsRunning;
     
 };
 

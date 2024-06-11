@@ -2,9 +2,13 @@
 #include "StaticMesh.h"
 #include "thread"
 
+#include "Types.h"
+
 void Application::Init()
 {
-	Coordinator* coordinator = Coordinator::GetCoordinator();
+	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
+
+	coordinator->AddEventListener(METHOD_LISTENER_NO_PARAM(Events::Application::TOGGLE, Application::ToggleApplication));
 
 	coordinator->RegisterComponent<Camera>();	
 	coordinator->RegisterComponent<Gravity>();
@@ -28,7 +32,6 @@ void Application::Init()
 	}
 
 	physicsSystem->Init();
-
 
 	auto cameraControlSystem = coordinator->RegisterSystem<CameraControlSystem>();
 	{
@@ -62,86 +65,42 @@ void Application::Init()
 		coordinator->SetSystemSignature<RenderSystem>(signature);
 	}
 
+	running = false;
 	renderSystem->Init();
-
-	/*std::vector<Entity> entities(MAX_ENTITIES - 1);
-
-	std::default_random_engine generator;
-	std::uniform_real_distribution<float> randPosition(-10.0f, 10.0f);
-	std::uniform_real_distribution<float> randRotation(0.0f, 3.0f);
-	std::uniform_real_distribution<float> randScale(3.0f, 5.0f);
-	std::uniform_real_distribution<float> randColor(0.0f, 1.0f);
-	std::uniform_real_distribution<float> randGravity(-10.0f, -1.0f);
-
-	float scale = randScale(generator);
-
-	for (auto& entity : entities)
-	{
-		entity = coordinator->CreateEntity();
-		std::cout << entity << std::endl;
-		coordinator->AddComponent(entity, Player{});
-
-		coordinator->AddComponent<Gravity>(
-			entity,
-			{ glm::vec3(0.0f, -3, 0.0f) });
-
-		coordinator->AddComponent(
-			entity,
-			RigidBody{
-				.velocity = glm::vec3(0.0f, 0.0f, 0.0f),
-				.acceleration = glm::vec3(0.0f, 0.0f, 0.0f)
-			});
-
-		coordinator->AddComponent(
-			entity,
-			Transform{
-				.position = glm::vec3(randPosition(generator), randPosition(generator), -30),
-				.rotation = glm::vec3(randRotation(generator), randRotation(generator), randRotation(generator)),
-				.scale = glm::vec3(scale, scale, scale)
-			});
-
-		coordinator->AddComponent(
-			entity,
-			Renderable{
-				.color = glm::vec4(randColor(generator), randColor(generator), randColor(generator), 1)
-			});
-	}*/
 }
 
 void Application::Update()
 {
-	Coordinator* coordinator = Coordinator::GetCoordinator();
+		std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
 
-	auto playerControlSystem = coordinator->GetSystem<PlayerControlSystem>();
-	auto cameraControlSystem = coordinator->GetSystem<CameraControlSystem>();
-	auto physicsSystem = coordinator->GetSystem<PhysicsSystem>();
+		auto playerControlSystem = coordinator->GetSystem<PlayerControlSystem>();
+		auto cameraControlSystem = coordinator->GetSystem<CameraControlSystem>();
+		auto physicsSystem = coordinator->GetSystem<PhysicsSystem>();
 
-	const float targetFrameDuration = 1.0f / 165.0f; // 60 FPS
-	auto frameStartTime = std::chrono::high_resolution_clock::now();
+		const float targetFrameDuration = 1.0f / 165.0f; // 165 FPS
+		auto frameStartTime = std::chrono::high_resolution_clock::now();
 
-	// Update systems
-	playerControlSystem->Update(dt);
-	cameraControlSystem->Update(dt);
-	physicsSystem->Update(dt);
+		playerControlSystem->Update(dt);
+		cameraControlSystem->Update(dt);
+		physicsSystem->Update(dt);
 
-	// Calculate the duration of the frame
-	auto frameEndTime = std::chrono::high_resolution_clock::now();
-	dt = std::chrono::duration<float>(frameEndTime - frameStartTime).count();
+		auto frameEndTime = std::chrono::high_resolution_clock::now();
+		dt = std::chrono::duration<float>(frameEndTime - frameStartTime).count();
 
-	float sleepDuration = targetFrameDuration - dt;
-	if (sleepDuration > 0)
-	{
-		std::this_thread::sleep_for(std::chrono::duration<float>(sleepDuration));
-	}
+		float sleepDuration = targetFrameDuration - dt;
+		if (sleepDuration > 0)
+		{
+			std::this_thread::sleep_for(std::chrono::duration<float>(sleepDuration));
+		}
 
-	// Update dt for the next frame
-	frameEndTime = std::chrono::high_resolution_clock::now();
-	dt = std::chrono::duration<float>(frameEndTime - frameStartTime).count();
+
+		frameEndTime = std::chrono::high_resolution_clock::now();
+		dt = std::chrono::duration<float>(frameEndTime - frameStartTime).count();
 }
 
 void Application::Render()
 {
-	Coordinator* coordinator = Coordinator::GetCoordinator();
+	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
 
 	auto renderSystem = coordinator->GetSystem<RenderSystem>();
 
@@ -151,8 +110,5 @@ void Application::Render()
 
 void Application::RenderEntitiesUI()
 {
-	Coordinator* coordinator = Coordinator::GetCoordinator();
-
-
-
+	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
 }

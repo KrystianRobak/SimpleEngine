@@ -3,6 +3,7 @@
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include <glm.hpp>
+#include <string>
 
 struct Transform
 {
@@ -12,16 +13,18 @@ struct Transform
 
     void GenerateGUIElements(std::uint32_t entity)
     {
-        std::string label = "Transform##" + entity;
-        ImGui::Text(label.c_str());
-        //if (ImGui::CollapsingHeader(label.c_str()))
-        //{
-            label = "Position## " + entity;
-            ImGui::SliderFloat3(label.c_str(), &position[0], -30.f, 30.f);
-            label = "Rotation## " + entity;
-            ImGui::SliderFloat3(label.c_str(), &rotation[0], 0.f, 1.f);
-            label = "Scale## " + entity;
-            ImGui::SliderFloat3(label.c_str(), &scale[0] , -15.f, 15.f);
-        //}
+        std::string entityStr = std::to_string(entity);
+
+        std::string transformLabel = "Transform##" + entityStr;
+        ImGui::Text("%s", transformLabel.c_str());
+
+        std::string positionLabel = "Position##" + entityStr;
+        ImGui::SliderFloat3(positionLabel.c_str(), &position[0], -30.f, 30.f);
+
+        std::string rotationLabel = "Rotation##" + entityStr;
+        ImGui::SliderFloat3(rotationLabel.c_str(), &rotation[0], 0.f, 1.f);
+
+        std::string scaleLabel = "Scale##" + entityStr;
+        ImGui::SliderFloat3(scaleLabel.c_str(), &scale[0], -15.f, 15.f);
     }
 };

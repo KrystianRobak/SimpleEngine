@@ -6,22 +6,27 @@ bool Window::Init(int width, int height, const std::string& title)
     this->height = height;
     this->title = title;
 
-    mRenderCtx->init(this);
+    RenderCtx->init(this);
 
-    mUICtx->init(this);
+    UICtx->init(this);
+
+    application->Init();
+
     propertyPanel = std::make_unique<PropertyPanel>();
-    sceneView = std::make_unique<SceneView>();
+    sceneView = std::make_unique<SceneView>(application);
     fileBrowser = std::make_unique<FileBrowser>();
     itemsSelectionPanel = std::make_unique<ItemsSelectionPanel>();
+    addingPanel = std::make_unique<AddingPanel>();
+    controlPanel = std::make_unique<ControlPanel>();
    
-    return mIsRunning;
+    return IsRunning;
 }
 
 Window::~Window()
 {
-    mUICtx->end();
+    UICtx->end();
 
-    mRenderCtx->end();
+    RenderCtx->end();
 }
 
 void Window::on_resize(int width, int height)
@@ -35,18 +40,17 @@ void Window::on_resize(int width, int height)
 
 void Window::on_close()
 {
-    mIsRunning = false;
+    IsRunning = false;
 }
 
 void Window::Render()
 {
-    // Clear the view
-    mRenderCtx->pre_render();
 
-    // Initialize UI components
-    mUICtx->pre_render();
+    RenderCtx->pre_render();
 
-    // render scene to framebuffer and add it to scene view
+    UICtx->pre_render();
+
+    controlPanel->Render();
 
     sceneView->Render();
 
@@ -56,10 +60,10 @@ void Window::Render()
 
     fileBrowser->Render();
 
-    // Render the UI 
-    mUICtx->post_render();
+    addingPanel->Render();
 
-    // Render end, swap buffers
-    mRenderCtx->post_render();
+    UICtx->post_render();
+
+    RenderCtx->post_render();
 
 }

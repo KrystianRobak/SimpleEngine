@@ -16,7 +16,7 @@ void PhysicsSystem::Init()
 
 void PhysicsSystem::Update(float dt)
 {
-	Coordinator* coordinator = Coordinator::GetCoordinator();
+	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
 
 	for (auto const& entityA : mEntities)
 	{
@@ -30,22 +30,26 @@ void PhysicsSystem::Update(float dt)
 
 				if (CollisionHandler::HandleCollision(colliderA->collider, colliderB->collider).second)
 				{
-					//Poprawienie pozycji kulii
+					auto sphere = dynamic_cast<CollisionSphere*>(colliderA->collider);
+					auto sphere2 = dynamic_cast<CollisionSphere*>(colliderB->collider);
+
 					auto& rigidBodyA = coordinator->GetComponent<RigidBody>(entityA);
 					auto& rigidBodyB = coordinator->GetComponent<RigidBody>(entityB);
 
 					auto& transformA = coordinator->GetComponent<Transform>(entityA);
 					auto& transformB = coordinator->GetComponent<Transform>(entityB);
 
+					float radiusA = sphere->radius;
+					float radiusB = sphere2->radius;
+					float combinedRadius = radiusA + radiusB;
+
 					glm::vec3 pos = transformA.position - transformB.position;
 
 					pos = glm::normalize(pos);
 
-					transformA.position += pos * 0.1f;
-					transformB.position -= pos * 0.1f;
+					transformA.position += pos * (combinedRadius - glm::length(pos) + 0.01f);
+					transformB.position -= pos * (combinedRadius - glm::length(pos) + 0.01f);
 
-					//Obliczenia fizyczne
-					
 					glm::vec3 posDifference = transformB.position - transformA.position;
 					glm::vec3 velDifference = rigidBodyB.velocity - rigidBodyA.velocity;
 
@@ -54,7 +58,6 @@ void PhysicsSystem::Update(float dt)
 					glm::vec3 direction = glm::normalize(posDifference);
 
 					glm::vec3 momentumComponent = glm::dot(velDifference, posDifference) * direction;
-
 
 					rigidBodyA.velocity = rigidBodyA.velocity + momentumComponent;
 					rigidBodyB.velocity = rigidBodyB.velocity - momentumComponent;
@@ -71,27 +74,27 @@ void PhysicsSystem::Update(float dt)
 
 		auto& rigidBody = coordinator->GetComponent<RigidBody>(entityA);
 
-		if ((left < -10 || right >= 10 || bottom < -10 || top > 10) && !rigidBody.repositioned) {
+		if ((left < -18 || right >= 18 || bottom < -13.5 || top > 13.5) && !rigidBody.repositioned) {
 			rigidBody.repositioned = true;
 
-			if (left < -10) {
-				sphere->centerPoint->x = -10 + sphere->radius;
+			if (left < -18) {
+				sphere->centerPoint->x = -18 + sphere->radius;
 				rigidBody.velocity.x = -rigidBody.velocity.x;
 			}
-			else if (right >= 10) {
-				sphere->centerPoint->x = 10 - sphere->radius;
+			else if (right >= 18) {
+				sphere->centerPoint->x = 18 - sphere->radius;
 				rigidBody.velocity.x = -rigidBody.velocity.x;
 			}
-			if (bottom < -10) {
-				sphere->centerPoint->y = -10 + sphere->radius;
+			if (bottom < -13.5) {
+				sphere->centerPoint->y = -13.5 + sphere->radius;
 				rigidBody.velocity.t = -rigidBody.velocity.y;
 			}
-			else if (top > 10) {
-				sphere->centerPoint->y = 10 - sphere->radius;
+			else if (top > 13.5) {
+				sphere->centerPoint->y = 13.5 - sphere->radius;
 				rigidBody.velocity.y = -rigidBody.velocity.y;
 			}
 		}
-		else if (!(left < -10 || right >= 10 || bottom < -10 || top > 10)) {
+		else if (!(left < -18 || right >= 18 || bottom < -13.5 || top > 13.5)) {
 			rigidBody.repositioned = false;
 		}
 
@@ -99,7 +102,9 @@ void PhysicsSystem::Update(float dt)
 		// Forces
 		auto const& gravity = coordinator->GetComponent<Gravity>(entityA);
 
-		transform.position += rigidBody.velocity * dt * 10.f;
+		glm::vec3 speed = rigidBody.velocity * dt * 240.f;
+
+		transform.position += rigidBody.velocity * dt * 240.f;
 
 		rigidBody.velocity += gravity.force * dt;
 	}

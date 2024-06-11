@@ -10,14 +10,28 @@
 
 class Coordinator
 {
+private:
+	std::unique_ptr<ComponentManager> mComponentManager;
+	std::unique_ptr<EntityManager> mEntityManager;
+	std::unique_ptr<EventManager> mEventManager;
+	std::unique_ptr<SystemManager> mSystemManager;
+
+	static std::shared_ptr<Coordinator> instance;
+
 public:
-	static Coordinator* GetCoordinator() 
+
+	static std::shared_ptr<Coordinator> GetCoordinator() 
 	{
 		if (instance == nullptr)
 		{
-			instance = new Coordinator;
+			instance = std::make_shared<Coordinator>();
 		}
 		return instance;
+	}
+
+	Coordinator()
+	{
+
 	}
 
 	void Init()
@@ -29,7 +43,6 @@ public:
 	}
 
 
-	// Entity methods
 	Entity CreateEntity()
 	{
 		return mEntityManager->CreateEntity();
@@ -55,6 +68,11 @@ public:
 
 	std::uint32_t GetSelectedEntity() {
 		return this->mEntityManager->GetSelectedEntity();
+	}
+
+	Signature GetEntitySignature(Entity entity)
+	{
+		return mEntityManager->GetSignature(entity);
 	}
 
 
@@ -95,11 +113,6 @@ public:
 		return mComponentManager->GetComponent<T>(entity);
 	}
 
-	Signature GetEntitySignature(Entity entity)
-	{
-		return mEntityManager->GetSignature(entity);
-	}
-
 	template<typename T>
 	ComponentType GetComponentType()
 	{
@@ -134,9 +147,9 @@ public:
 
 
 	// Event methods
-	void AddEventListener(EventId eventId, std::function<void(Event&)> const& listener)
+	void AddEventListener(EventType eventType, std::function<void(Event&)> const& listener)
 	{
-		mEventManager->AddListener(eventId, listener);
+		mEventManager->AddListener(eventType, listener);
 	}
 
 	void SendEvent(Event& event)
@@ -144,16 +157,10 @@ public:
 		mEventManager->SendEvent(event);
 	}
 
-	void SendEvent(EventId eventId)
+	void SendEvent(EventType eventType)
 	{
-		mEventManager->SendEvent(eventId);
+		mEventManager->SendEvent(eventType);
 	}
 
-private:
-	std::unique_ptr<ComponentManager> mComponentManager;
-	std::unique_ptr<EntityManager> mEntityManager;
-	std::unique_ptr<EventManager> mEventManager;
-	std::unique_ptr<SystemManager> mSystemManager;
 
-	static Coordinator* instance;
 };

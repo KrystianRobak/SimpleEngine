@@ -11,6 +11,7 @@ class Event;
 class RenderSystem : public System
 {
 public:
+	void RenderBorder();
 	void Init();
 
 	void Update(float dt);

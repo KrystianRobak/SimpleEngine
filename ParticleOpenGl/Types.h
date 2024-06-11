@@ -4,20 +4,13 @@
 #include <cstdint>
 
 
-// Source: https://gist.github.com/Lee-R/3839813
-constexpr std::uint32_t fnv1a_32(char const* s, std::size_t count)
-{
-	return ((count ? fnv1a_32(s, count - 1) : 2166136261u) ^ s[count]) * 16777619u; // NOLINT (hicpp-signed-bitwise)
-}
-
-constexpr std::uint32_t operator "" _hash(char const* s, std::size_t count)
-{
-	return fnv1a_32(s, count);
-}
-
-
 // ECS
 using Entity = std::uint32_t;
+
+const Entity APPLICATION = -1;
+const Entity GUI = -2;
+const Entity WINDOW = -3;
+
 const Entity MAX_ENTITIES = 20;
 using ComponentType = std::uint8_t;
 const ComponentType MAX_COMPONENTS = 32;
@@ -25,6 +18,8 @@ using Signature = std::bitset<MAX_COMPONENTS>;
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
+
+
 // Input
 enum class InputButtons
 {
@@ -38,26 +33,33 @@ enum class InputButtons
 
 
 // Events
-using EventId = std::uint32_t;
-using ParamId = std::uint32_t;
+using EventType = std::string;
+using ParamId = std::string;
 
-#define METHOD_LISTENER(EventType, Listener) EventType, std::bind(&Listener, this, std::placeholders::_1)
-#define FUNCTION_LISTENER(EventType, Listener) EventType, std::bind(&Listener, std::placeholders::_1)
+#define METHOD_LISTENER_NO_PARAM(EventType, Listener) EventType, std::bind(&Listener, this)
+#define METHOD_LISTENER_ONE_PARAM(EventType, Listener) EventType, std::bind(&Listener, this, std::placeholders::_1)
+#define METHOD_LISTENER_TWO_PARAM(EventType, Listener) EventType, std::bind(&Listener, this, std::placeholders::_1, std::placeholders::_2)
+#define METHOD_LISTENER_THREE_PARAM(EventType, Listener) EventType, std::bind(&Listener, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)
+#define METHOD_LISTENER_FOUR_PARAM(EventType, Listener) EventType, std::bind(&Listener, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4)
 
-// TODO: Make these easier to define and use (macro?)
-// TODO: Add some kind of enforcement/automation that a SetParam type and a GetParam type match
+#define FUNCTION_LISTENER_ONE_PARAM(EventType, Listener) EventType, std::bind(&Listener, std::placeholders::_1)
+
 
 namespace Events::Window {
-	const EventId QUIT = "Events::Window::QUIT"_hash;
-	const EventId RESIZED = "Events::Window::RESIZED"_hash;
-	const EventId INPUT = "Events::Window::INPUT"_hash;
+	const EventType QUIT = "Events::Window::QUIT";
+	const EventType RESIZED = "Events::Window::RESIZED";
+	const EventType INPUT = "Events::Window::INPUT";
 }
 
 namespace Events::Window::Input {
-	const ParamId INPUT = "Events::Window::Input::INPUT"_hash;
+	const ParamId INPUT = "Events::Window::Input::INPUT";
 }
 
 namespace Events::Window::Resized {
-	const ParamId WIDTH = "Events::Window::Resized::WIDTH"_hash;
-	const ParamId HEIGHT = "Events::Window::Resized::HEIGHT"_hash;
+	const ParamId WIDTH = "Events::Window::Resized::WIDTH";
+	const ParamId HEIGHT = "Events::Window::Resized::HEIGHT";
+}
+
+namespace Events::Application {
+	const EventType TOGGLE = "Events::Application::TOGGLE";
 }

@@ -69,7 +69,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ParticleOpenGl.h">
+    <ClCompile Include="ParticleOpenGl.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui_widgets.cpp">
@@ -182,6 +182,12 @@
     </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="AddingPanel.cpp">
+      <Filter>Pliki źródłowe\NEW\Render\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ControlPanel.cpp">
+      <Filter>Pliki źródłowe\NEW\Render\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -331,6 +337,12 @@
     </ClInclude>
     <ClInclude Include="GJK.h">
       <Filter>Pliki nagłówkowe\NEW\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="AddingPanel.h">
+      <Filter>Pliki nagłówkowe\NEW\Render\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlPanel.h">
+      <Filter>Pliki nagłówkowe\NEW\Render\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -11,10 +11,9 @@ struct Renderable
 
     void GenerateGUIElements(std::uint32_t entity)
     {
-        std::string label = "Object##" + entity;
+        std::string entityStr = std::to_string(entity);
 
-            label = "Color##" + entity;
-            ImGui::ColorPicker4(label.c_str(), &color[0], ImGuiColorEditFlags_PickerHueWheel | ImGuiColorEditFlags_DisplayRGB);
-
+        std::string colorLabel = "Color##" + entityStr;
+        ImGui::ColorPicker4(colorLabel.c_str(), &color[0], ImGuiColorEditFlags_PickerHueWheel | ImGuiColorEditFlags_DisplayRGB);
     }
 };

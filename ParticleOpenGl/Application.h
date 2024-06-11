@@ -33,7 +33,7 @@ public:
 
 	void ToggleApplication()
 	{
-		running != running;
+		this->running = !this->running;
 	}
 
 	bool IsRunning()
@@ -42,6 +42,6 @@ public:
 	}
 private:
 	float dt = 0.0f;
-	bool running = false;
+	bool running;
 };
 

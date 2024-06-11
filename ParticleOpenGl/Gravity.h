@@ -12,10 +12,9 @@ struct Gravity
 
     void GenerateGUIElements(std::uint32_t entity)
     {
-        std::string label = "Object##" + entity;
+        std::string entityStr = std::to_string(entity);
 
-            label = "Gravity## " + entity;
-            ImGui::SliderFloat3(label.c_str(), &force[0], -15.f, 15.f);
-
+        std::string gravityLabel = "Gravity##" + entityStr;
+        ImGui::SliderFloat3(gravityLabel.c_str(), &force[0], -15.f, 15.f);
     }
 };

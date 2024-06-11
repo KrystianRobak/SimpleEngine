@@ -10,28 +10,28 @@ class Event
 public:
 	Event() = delete;
 
-	explicit Event(EventId type)
+	explicit Event(EventType type)
 		: mType(type)
 	{}
 
 	template<typename T>
-	void SetParam(EventId id, T value)
+	void SetParam(EventType id, T value)
 	{
 		mData[id] = value;
 	}
 
 	template<typename T>
-	T GetParam(EventId id)
+	T GetParam(EventType id)
 	{
 		return std::any_cast<T>(mData[id]);
 	}
 
-	EventId GetType() const
+	EventType GetType() const
 	{
 		return mType;
 	}
 
 private:
-	EventId mType{};
-	std::unordered_map<EventId, std::any> mData{};
+	EventType mType{};
+	std::unordered_map<EventType, std::any> mData{};
 };
