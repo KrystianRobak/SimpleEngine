@@ -13,6 +13,11 @@ public:
     FileBrowser() {
         FindFiles("..", false);
         std::string currentPath = "..";
+        std::string iconPath = "icons/document.png";
+        documentTextureID = LoadFileTexture(iconPath);
+
+        iconPath = "icons/folder.png";
+        folderTextureID = LoadFileTexture(iconPath);
     };
     void FindFiles(std::string folderPath, bool direction);
     void RenderFile(GLuint textureID, float itemWidth, float itemSpacing, int itemsPerRow, int& itemsInRow, std::filesystem::directory_entry& entry);
@@ -29,5 +34,7 @@ private:
     std::vector<std::string> lastPath;
     std::filesystem::directory_entry selectedFile;
     bool isDragging = false;
+    GLuint documentTextureID;
+    GLuint folderTextureID;
 };
 

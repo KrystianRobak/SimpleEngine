@@ -43,5 +43,6 @@ public:
 private:
 	float dt = 0.0f;
 	bool running;
+	std::shared_ptr<Coordinator> Coordinator;
 };
 
