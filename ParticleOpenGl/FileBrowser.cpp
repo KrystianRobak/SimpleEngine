@@ -110,12 +110,6 @@ void FileBrowser::RenderFile(GLuint textureID, float itemWidth, float itemSpacin
 
 void FileBrowser::Render()
 {
-    std::string iconPath = "icons/document.png"; // Adjust path accordingly
-    GLuint documentTextureID = LoadFileTexture(iconPath);
-
-    iconPath = "icons/folder.png"; // Adjust path accordingly
-    GLuint folderTextureID = LoadFileTexture(iconPath);
-    
     std::vector<std::filesystem::directory_entry> localFiles = files;
     std::vector<std::filesystem::directory_entry> localDirectories = directories;
     

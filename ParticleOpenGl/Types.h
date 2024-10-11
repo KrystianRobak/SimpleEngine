@@ -11,7 +11,7 @@ const Entity APPLICATION = -1;
 const Entity GUI = -2;
 const Entity WINDOW = -3;
 
-const Entity MAX_ENTITIES = 20;
+const Entity MAX_ENTITIES = 50;
 using ComponentType = std::uint8_t;
 const ComponentType MAX_COMPONENTS = 32;
 using Signature = std::bitset<MAX_COMPONENTS>;
