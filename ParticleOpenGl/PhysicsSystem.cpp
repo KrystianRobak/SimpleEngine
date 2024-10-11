@@ -43,21 +43,25 @@ void PhysicsSystem::Update(float dt)
 					float radiusB = sphere2->radius;
 					float combinedRadius = radiusA + radiusB;
 
-					glm::vec3 pos = transformA.position - transformB.position;
+					glm::vec3 posDifference = transformA.position - transformB.position;
 
-					pos = glm::normalize(pos);
-
-					transformA.position += pos * (combinedRadius - glm::length(pos) + 0.01f);
-					transformB.position -= pos * (combinedRadius - glm::length(pos) + 0.01f);
-
-					glm::vec3 posDifference = transformB.position - transformA.position;
-					glm::vec3 velDifference = rigidBodyB.velocity - rigidBodyA.velocity;
-
-					glm::vec3 velPosScalar = velDifference * posDifference;
+					float currentDistance = glm::length(posDifference);
 
 					glm::vec3 direction = glm::normalize(posDifference);
 
-					glm::vec3 momentumComponent = glm::dot(velDifference, posDifference) * direction;
+					float overlap = combinedRadius - currentDistance + 0.01f;
+
+					transformA.position += direction * (overlap / 2.0f);
+					transformB.position -= direction * (overlap / 2.0f);
+
+					posDifference = transformB.position - transformA.position;
+					glm::vec3 velDifference = rigidBodyB.velocity - rigidBodyA.velocity;
+
+					direction = glm::normalize(posDifference);
+
+					float relVelAlongDir = glm::dot(velDifference, direction);
+
+					glm::vec3 momentumComponent = relVelAlongDir * direction;
 
 					rigidBodyA.velocity = rigidBodyA.velocity + momentumComponent;
 					rigidBodyB.velocity = rigidBodyB.velocity - momentumComponent;
@@ -102,9 +106,9 @@ void PhysicsSystem::Update(float dt)
 		// Forces
 		auto const& gravity = coordinator->GetComponent<Gravity>(entityA);
 
-		glm::vec3 speed = rigidBody.velocity * dt * 240.f;
+		glm::vec3 speed = rigidBody.velocity * dt * 24.f;
 
-		transform.position += rigidBody.velocity * dt * 240.f;
+		transform.position += rigidBody.velocity * dt * 24.f;
 
 		rigidBody.velocity += gravity.force * dt;
 	}
