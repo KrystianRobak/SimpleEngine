@@ -55,5 +55,5 @@ void PlayerControlSystem::Update(float dt)
 
 void PlayerControlSystem::InputListener(Event& event)
 {
-	mButtons = event.GetParam<std::bitset<8>>(Events::Window::Input::INPUT);
+	//mButtons = event.GetParam<std::bitset<8>>(Events::Window::Input::INPUT);
 }

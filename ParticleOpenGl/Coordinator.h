@@ -5,16 +5,19 @@
 #include "EventManager.h"
 #include "SystemManager.h"
 #include "Types.h"
+#include "Camera.h"
 #include <memory>
 
 
 class Coordinator
 {
 private:
-	std::unique_ptr<ComponentManager> mComponentManager;
+	std::shared_ptr<ComponentManager> mComponentManager;
 	std::unique_ptr<EntityManager> mEntityManager;
 	std::unique_ptr<EventManager> mEventManager;
 	std::unique_ptr<SystemManager> mSystemManager;
+
+	Camera MainCamera;
 
 	static std::shared_ptr<Coordinator> instance;
 
@@ -36,16 +39,27 @@ public:
 
 	void Init()
 	{
-		mComponentManager = std::make_unique<ComponentManager>();
+		mComponentManager = std::make_shared<ComponentManager>();
 		mEntityManager = std::make_unique<EntityManager>();
 		mEventManager = std::make_unique<EventManager>();
 		mSystemManager = std::make_unique<SystemManager>();
 	}
 
+	std::shared_ptr<ComponentManager> GetComponentManager()
+	{
+		return this->mComponentManager;
+	}  
+
 
 	Entity CreateEntity()
 	{
 		return mEntityManager->CreateEntity();
+	}
+
+	Entity CreateLightEntity()
+	{
+
+		return mEntityManager->CreateLightEntity();
 	}
 
 	void DestroyEntity(Entity entity)
@@ -162,5 +176,9 @@ public:
 		mEventManager->SendEvent(eventType);
 	}
 
+	Camera* GetCamera()
+	{
+		return &MainCamera;
+	}
 
 };

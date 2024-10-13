@@ -11,5 +11,12 @@ void ControlPanel::Render()
             coordinator->SendEvent(Events::Application::TOGGLE);
         }
         ImGui::EndGroup();
+        ImGui::BeginGroup();
+        if (ImGui::Button("Recompile shader"))
+        {
+            std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
+            coordinator->SendEvent(Events::Application::RECOMPILE_SHADER);
+        }
+        ImGui::EndGroup();
     ImGui::End();
 }

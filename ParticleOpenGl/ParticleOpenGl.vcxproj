@@ -207,6 +207,7 @@
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="ItemsSelectionPanel.h" />
     <ClInclude Include="IWindow.h" />
+    <ClInclude Include="LightSource.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="StaticMesh.h" />
     <ClInclude Include="OpenGlContext.h" />

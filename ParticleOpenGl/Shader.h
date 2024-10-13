@@ -12,6 +12,7 @@ class Shader
 public:
 	Shader(const char* vertexPath, const char* fragmentPath);
 
+    void ChangeShaderDefineStatus();
     void Use();
 
     unsigned int get_program_id() { return ID; }
@@ -37,6 +38,6 @@ private:
 
 private:
 	unsigned int ID;
-
+    const char* mFragmentPath;
 };
 

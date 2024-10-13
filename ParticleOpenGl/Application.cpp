@@ -19,7 +19,7 @@ void Application::Init()
 	Coordinator->RegisterComponent<Transform>();
 	Coordinator->RegisterComponent<Collider>();
 	Coordinator->RegisterComponent<StaticMesh>();
-
+	Coordinator->RegisterComponent<LightSource>();
 
 	auto physicsSystem = Coordinator->RegisterSystem<PhysicsSystem>();
 	{
@@ -58,9 +58,6 @@ void Application::Init()
 	auto renderSystem = Coordinator->RegisterSystem<RenderSystem>();
 	{
 		Signature signature;
-		signature.set(Coordinator->GetComponentType<Renderable>());
-		signature.set(Coordinator->GetComponentType<Transform>());
-		signature.set(Coordinator->GetComponentType<Collider>());
 
 		Coordinator->SetSystemSignature<RenderSystem>(signature);
 	}

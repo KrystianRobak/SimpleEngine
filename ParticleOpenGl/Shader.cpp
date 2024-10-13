@@ -2,6 +2,8 @@
 
 Shader::Shader(const char* vertexPath, const char* fragmentPath)
 {
+    mFragmentPath = fragmentPath;
+
     // 1. retrieve the vertex/fragment source code from filePath
     std::string vertexCode;
     std::string fragmentCode;
@@ -53,8 +55,20 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     // delete the shaders as they're linked into our program now and no longer necessary
     glDeleteShader(vertex);
     glDeleteShader(fragment);
+    std::cout << "SHADER::COMPILED_SUCCESFULLY" << std::endl;
 }
 
+
+void Shader::ChangeShaderDefineStatus()
+{
+    std::ifstream FileToChange;
+    FileToChange.open(mFragmentPath);
+    std::string line;
+    for (int i = 0; i < 2; i++)
+    {
+        //line = FileToChange.getline();
+    }
+}
 
 void Shader::Use()
 {

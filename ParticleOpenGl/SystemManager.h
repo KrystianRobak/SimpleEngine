@@ -54,7 +54,7 @@ public:
 			auto const& system = pair.second;
 
 
-			system->mEntities.erase(entity);
+			system->GetEntities().erase(entity);
 		}
 	}
 
@@ -68,11 +68,11 @@ public:
 
 			if ((entitySignature & systemSignature) == systemSignature)
 			{
-				system->mEntities.insert(entity);
+				system->GetEntities().insert(entity);
 			}
 			else
 			{
-				system->mEntities.erase(entity);
+				system->GetEntities().erase(entity);
 			}
 		}
 	}

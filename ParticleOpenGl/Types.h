@@ -11,7 +11,9 @@ const Entity APPLICATION = -1;
 const Entity GUI = -2;
 const Entity WINDOW = -3;
 
-const Entity MAX_ENTITIES = 50;
+const Entity MAX_ENTITIES = 60;
+const Entity MAX_LIGHT_ENTITIES = 10;
+const Entity MAX_OBJECT_ENTITIES = 50;
 using ComponentType = std::uint8_t;
 const ComponentType MAX_COMPONENTS = 32;
 using Signature = std::bitset<MAX_COMPONENTS>;
@@ -62,4 +64,6 @@ namespace Events::Window::Resized {
 
 namespace Events::Application {
 	const EventType TOGGLE = "Events::Application::TOGGLE";
+	const EventType RECOMPILE_SHADER = "Events::Application::RECOMPILE_SHADER";
+	const EventType LIGHT_ENTITY_ADDED = "Events::Application::LIGHT_ENTITY_ADDED";
 }

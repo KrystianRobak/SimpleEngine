@@ -6,58 +6,51 @@
 
 
 
+
 void CameraControlSystem::Init()
 {
 	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
 	coordinator->AddEventListener(METHOD_LISTENER_ONE_PARAM(Events::Window::INPUT, CameraControlSystem::InputListener));
+
+	BindCamera(coordinator->GetCamera());
 }
 
 void CameraControlSystem::Update(float dt)
 {
-	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
-	for (auto& entity : mEntities)
+	float speed = 0.25f;
+
+	if (mButtons == 'W')
 	{
-		auto& transform = coordinator->GetComponent<Transform>(entity);
-
-		float speed = 20.0f;
-
-
-		if (mButtons.test(static_cast<std::size_t>(InputButtons::W)))
-		{
-			transform.position.z -= (dt * speed);
-		}
-
-		else if (mButtons.test(static_cast<std::size_t>(InputButtons::S)))
-		{
-			transform.position.z += (dt * speed);
-		}
-
-
-		if (mButtons.test(static_cast<std::size_t>(InputButtons::Q)))
-		{
-			transform.position.y += (dt * speed);
-		}
-
-		else if (mButtons.test(static_cast<std::size_t>(InputButtons::E)))
-		{
-			transform.position.y -= (dt * speed);
-		}
-
-
-		if (mButtons.test(static_cast<std::size_t>(InputButtons::A)))
-		{
-			transform.position.x -= (dt * speed);
-		}
-
-		else if (mButtons.test(static_cast<std::size_t>(InputButtons::D)))
-		{
-			transform.position.x += (dt * speed);
-		}
+		ControlledCamera->CameraTransform.position.z -= speed;//(dt * speed);
 	}
+	if (mButtons == 'S')
+	{
+		ControlledCamera->CameraTransform.position.z += speed;//(dt * speed);
+	}
+	if (mButtons == 'A')
+	{
+		ControlledCamera->CameraTransform.position.x -= speed;//(dt * speed);
+	}
+	if (mButtons == 'D')
+	{
+		ControlledCamera->CameraTransform.position.x += speed;//(dt * speed);
+	}
+	if (mButtons == 'Q')
+	{
+		ControlledCamera->CameraTransform.position.y += speed;//(dt * speed);
+	}
+	if (mButtons == 'E')
+	{
+		ControlledCamera->CameraTransform.position.y -= speed;//(dt * speed);
+	}
+
+	//else if (mButtons.test(static_cast<std::size_t>(InputButtons::E)))
+
+	mButtons = 0;
 }
 
 void CameraControlSystem::InputListener(Event& event)
 {
-	mButtons = event.GetParam<std::bitset<8>>(Events::Window::Input::INPUT);
+	mButtons = event.GetParam<int>("InputKey");
 }
 

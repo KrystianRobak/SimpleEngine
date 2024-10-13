@@ -3,11 +3,24 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <cstdio>
+#include "coordinator.h"
 
 static void on_window_size_callback(GLFWwindow* window, int width, int height)
 {
     auto pWindow = static_cast<IWindow*>(glfwGetWindowUserPointer(window));
     pWindow->on_resize(width, height);
+}
+
+static void on_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
+
+    if ((key >= 65 && key <= 90) && (action == GLFW_REPEAT || action == GLFW_PRESS))
+    {
+        Event KeyEvent(Events::Window::INPUT);
+        KeyEvent.SetParam<int>("InputKey", key);
+        coordinator->SendEvent(KeyEvent);
+    }
 }
 
 bool OpenGlContext::init(IWindow* window)
@@ -42,8 +55,8 @@ bool OpenGlContext::init(IWindow* window)
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
     /* Initialize the library */
     glfwSetWindowSizeCallback(glwindow, on_window_size_callback);
-   /* glfwSetKeyCallback(glWindow, on_key_callback);
-    glfwSetScrollCallback(glWindow, on_scroll_callback);
+    glfwSetKeyCallback(glwindow, on_key_callback);
+    /*glfwSetScrollCallback(glWindow, on_scroll_callback);
     
     glfwSetWindowCloseCallback(glWindow, on_window_close_callback);*/
     return true;

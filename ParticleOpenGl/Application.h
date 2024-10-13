@@ -9,6 +9,7 @@
 #include "Camera.h"
 #include "Player.h"
 #include "Thrust.h"
+#include "LightSource.h"
 
 #include "coordinator.h"
 

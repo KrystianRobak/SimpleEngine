@@ -344,6 +344,9 @@
     <ClInclude Include="ControlPanel.h">
       <Filter>Pliki nagłówkowe\NEW\Render\UI</Filter>
     </ClInclude>
+    <ClInclude Include="LightSource.h">
+      <Filter>Pliki nagłówkowe\NEW\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\DefaultCubeShader\DefaultCube_FragmentShader.fs" />

@@ -10,7 +10,12 @@ class EntityManager
 public:
 	EntityManager()
 	{
-		for (Entity entity = 0; entity < MAX_ENTITIES; ++entity)
+		for (Entity entity = 0; entity < MAX_LIGHT_ENTITIES; entity++)
+		{
+			mAvailableLightEntities.push(entity);
+		}
+
+		for (Entity entity = MAX_LIGHT_ENTITIES+1; entity < MAX_ENTITIES; ++entity)
 		{
 			mAvailableEntities.push(entity);
 		}
@@ -23,6 +28,17 @@ public:
 		Entity id = mAvailableEntities.front();
 		mAvailableEntities.pop();
 		++mLivingEntityCount;
+
+		return id;
+	}
+
+	Entity CreateLightEntity()
+	{
+		assert(mLivingLightEntityCount < MAX_LIGHT_ENTITIES && "Too many entities in existence.");
+
+		Entity id = mAvailableLightEntities.front();
+		mAvailableLightEntities.pop();
+		++mLivingLightEntityCount;
 
 		return id;
 	}
@@ -66,7 +82,9 @@ public:
 
 private:
 	std::queue<Entity> mAvailableEntities{};
+	std::queue<Entity> mAvailableLightEntities{};
 	std::array<Signature, MAX_ENTITIES> mSignatures{};
 	std::uint32_t mLivingEntityCount{};
+	std::uint32_t mLivingLightEntityCount{};
 	std::uint32_t selectedEntity;
 };
