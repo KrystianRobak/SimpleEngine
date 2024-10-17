@@ -27,7 +27,6 @@ void Application::Init()
 		signature.set(Coordinator->GetComponentType<Gravity>());
 		signature.set(Coordinator->GetComponentType<RigidBody>());
 		signature.set(Coordinator->GetComponentType<Transform>());
-		signature.set(Coordinator->GetComponentType<Collider>());
 		Coordinator->SetSystemSignature<PhysicsSystem>(signature);
 	}
 

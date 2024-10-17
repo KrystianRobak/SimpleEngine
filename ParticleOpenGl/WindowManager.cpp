@@ -1,6 +1,5 @@
 #include "WindowManager.h"
 
-#include "coordinator.h"
 #include <bitset>
 #include <iostream>
 
@@ -56,50 +55,3 @@ void WindowManager::Shutdown()
 	glfwDestroyWindow(mWindow);
 	glfwTerminate();
 }
-
-//void WindowManager::ProcessEvents()
-//{
-//	glfwPollEvents();
-//
-//	bool buttonStateChanged = true;
-//
-//	if (glfwGetKey(mWindow, GLFW_KEY_ESCAPE))
-//	{
-//		coordinator->SendEvent(Events::Window::QUIT);
-//	}
-//	else if (glfwGetKey(mWindow, GLFW_KEY_W))
-//	{
-//		mButtons.set(static_cast<std::size_t>(InputButtons::W));
-//	}
-//	else if (glfwGetKey(mWindow, GLFW_KEY_A))
-//	{
-//		mButtons.set(static_cast<std::size_t>(InputButtons::A));
-//	}
-//	else if (glfwGetKey(mWindow, GLFW_KEY_S))
-//	{
-//		mButtons.set(static_cast<std::size_t>(InputButtons::S));
-//	}
-//	else if (glfwGetKey(mWindow, GLFW_KEY_D))
-//	{
-//		mButtons.set(static_cast<std::size_t>(InputButtons::D));
-//	}
-//	else if (glfwGetKey(mWindow, GLFW_KEY_Q))
-//	{
-//		mButtons.set(static_cast<std::size_t>(InputButtons::Q));
-//	}
-//	else if (glfwGetKey(mWindow, GLFW_KEY_E))
-//	{
-//		mButtons.set(static_cast<std::size_t>(InputButtons::E));
-//	}
-//	else
-//	{
-//		buttonStateChanged = false;
-//	}
-//
-//	if (buttonStateChanged)
-//	{
-//		Event event(Events::Window::INPUT);
-//		event.SetParam(Events::Window::Input::INPUT, mButtons);
-//		coordinator->SendEvent(event);
-//	}
-//}
