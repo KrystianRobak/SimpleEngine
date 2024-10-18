@@ -1,53 +1,50 @@
-#pragma once
-#ifndef MESH_H
-#define MESH_H
+    #pragma once
 
-#include <glm.hpp>
-//#include <gtc/matrix_transform.hpp>
-#include <string>
-#include <vector>
+    #include "LibExporter.h"
 
-//#include "Shader.h"
+    #include <glm.hpp>
+    #include <vector>
 
-#define MAX_BONE_INFLUENCE 4
+    //#include <gtc/matrix_transform.hpp>
+    //#include "Shader.h"
 
-struct Vertex {
-    // position
-    glm::vec3 Position;
-    // normal
-    glm::vec3 Normal;
-    // texCoords
-    glm::vec2 TexCoords;
-    // tangent
-    glm::vec3 Tangent;
-    // bitangent
-    glm::vec3 Bitangent;
-    //bone indexes which will influence this vertex
-    int m_BoneIDs[MAX_BONE_INFLUENCE];
-    //weights from each bone
-    float m_Weights[MAX_BONE_INFLUENCE];
-};
+    #define MAX_BONE_INFLUENCE 4
 
-struct Texture {
-    unsigned int id;
-    std::string type;
-    std::string path;
-};
+    struct COMPONENTS_API Vertex {
+        // position
+        glm::vec3 Position;
+        // normal
+        glm::vec3 Normal;
+        // texCoords
+        glm::vec2 TexCoords;
+        // tangent
+        glm::vec3 Tangent;
+        // bitangent
+        glm::vec3 Bitangent;
+        //bone indexes which will influence this vertex
+        int m_BoneIDs[MAX_BONE_INFLUENCE];
+        //weights from each bone
+        float m_Weights[MAX_BONE_INFLUENCE];
+    };
 
-class Mesh
-{
-public:
+  struct COMPONENTS_API Texture {
+        unsigned int id;
+        char* type;
+        char* path;
+    };
 
-    std::vector<Vertex>       vertices;
-    std::vector<unsigned int> indices;
-    std::vector<Texture>      textures;
+    struct COMPONENTS_API Mesh
+    {
+    public:
 
-    Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
-    //void Draw(Shader& shader);
-private:
-    unsigned int VAO, VBO, EBO;
+        std::vector<Vertex>       vertices;
+        std::vector<unsigned int> indices;
+        std::vector<Texture>      textures;
 
-    //void setupMesh();
-};
+        Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
+        //void Draw(Shader& shader);
+    private:
+        unsigned int VAO, VBO, EBO;
 
-#endif
+        //void setupMesh();
+    };

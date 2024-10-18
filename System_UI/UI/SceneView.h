@@ -5,16 +5,16 @@
 
 #include <filesystem>
 #include <string>
+#include <glm.hpp>
 
 class SceneView : public UIComponent
 {
 public:
-    SceneView(std::shared_ptr<Application> application) : frameBuffer(nullptr), size(800, 600)
+    SceneView() : frameBuffer(nullptr), size(800, 600)
     {
         frameBuffer = std::make_unique<OpenGlFrameBuffer>();
         frameBuffer->create_buffers(800, 600);
        // mLight = std::make_unique<nelems::Light>();
-        std::cout << application << std::endl;
     }
 
 

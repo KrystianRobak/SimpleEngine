@@ -53,7 +53,7 @@ void AddingPanel::Render()
                 });
 
             auto& staticMesh = coordinator->GetComponent<StaticMesh>(entity);
-            staticMesh.loadModel("model/ball/ball.obj");
+            //staticMesh.loadModel("model/ball/ball.obj");
 
             auto& renderable = coordinator->GetComponent<Renderable>(entity);
 
@@ -108,7 +108,7 @@ void AddingPanel::Render()
                 });
 
             auto& staticMesh = coordinator->GetComponent<StaticMesh>(entity);
-            staticMesh.loadModel("model/cube/cube.obj");
+            //staticMesh.loadModel("model/cube/cube.obj");
 
             auto& renderable = coordinator->GetComponent<Renderable>(entity);
 
@@ -163,7 +163,7 @@ void AddingPanel::Render()
                 });
 
             auto& staticMesh = coordinator->GetComponent<StaticMesh>(entity);
-            staticMesh.loadModel("model/ball/ball.obj");
+            //staticMesh.loadModel("model/ball/ball.obj");
         }
     }
            

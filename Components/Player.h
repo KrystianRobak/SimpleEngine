@@ -1,6 +1,7 @@
 #pragma once
 
+#include "LibExporter.h"
 
-struct Player
+struct COMPONENTS_API Player
 {
 };

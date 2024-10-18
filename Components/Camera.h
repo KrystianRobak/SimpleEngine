@@ -1,11 +1,13 @@
 #pragma once
 
+#include "LibExporter.h"
+
 #include <glm.hpp>
 #include "Transform.h"
 
 #define myPi 3.14159265358979323846264338327950288
 
-struct Camera
+struct COMPONENTS_API Camera
 {
 	Transform CameraTransform
 	{

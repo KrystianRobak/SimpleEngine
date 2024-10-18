@@ -15,10 +15,9 @@
 
 #include "CameraControlSystem.h"
 #include "PhysicsSystem.h"
-#include "PlayerControlSystem.h"
 #include "RenderSystem.h"
+#include "UiSystem.h"
 
-#include "WindowManager.h"
 #include <chrono>
 #include <random>
 

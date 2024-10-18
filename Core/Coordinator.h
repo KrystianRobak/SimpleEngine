@@ -8,14 +8,19 @@
 
 #include <memory>
 
+#ifdef COORDINATOR_EXPORTS
+#define COORDINATOR_API __declspec(dllexport)
+#else
+#define COORDINATOR_API __declspec(dllimport)
+#endif
 
-class Coordinator
+class COORDINATOR_API Coordinator
 {
 private:
 	std::shared_ptr<ComponentManager> mComponentManager;
 	std::unique_ptr<EntityManager> mEntityManager;
 	std::unique_ptr<EventManager> mEventManager;
-	std::unique_ptr<SystemManager> mSystemManager;
+	//std::unique_ptr<SystemManager> mSystemManager;
 
 	static std::shared_ptr<Coordinator> instance;
 
@@ -40,7 +45,7 @@ public:
 		mComponentManager = std::make_shared<ComponentManager>();
 		mEntityManager = std::make_unique<EntityManager>();
 		mEventManager = std::make_unique<EventManager>();
-		mSystemManager = std::make_unique<SystemManager>();
+		//mSystemManager = std::make_unique<SystemManager>();
 	}
 
 	std::shared_ptr<ComponentManager> GetComponentManager()
@@ -67,7 +72,7 @@ public:
 
 		mComponentManager->EntityDestroyed(entity);
 
-		mSystemManager->EntityDestroyed(entity);
+		//mSystemManager->EntityDestroyed(entity);
 	}
 
 	std::uint32_t GetEntitiesAmount()
@@ -110,7 +115,7 @@ public:
 		signature.set(mComponentManager->GetComponentType<T>(), true);
 		mEntityManager->SetSignature(entity, signature);
 
-		mSystemManager->EntitySignatureChanged(entity, signature);
+		//mSystemManager->EntitySignatureChanged(entity, signature);
 	}
 
 	template<typename T>
@@ -122,7 +127,7 @@ public:
 		signature.set(mComponentManager->GetComponentType<T>(), false);
 		mEntityManager->SetSignature(entity, signature);
 
-		mSystemManager->EntitySignatureChanged(entity, signature);
+		//mSystemManager->EntitySignatureChanged(entity, signature);
 	}
 
 	template<typename T>
@@ -143,25 +148,25 @@ public:
 	}
 
 
-	// System methods
-	template<typename T>
-	std::shared_ptr<T> RegisterSystem()
-	{
-		return mSystemManager->RegisterSystem<T>();
-	}
+	//// System methods
+	//template<typename T>
+	//std::shared_ptr<T> RegisterSystem()
+	//{
+	//	return mSystemManager->RegisterSystem<T>();
+	//}
 
-	template<typename T>
-	std::shared_ptr<T> GetSystem()
-	{
-		return mSystemManager->GetSystem<T>();
-	}
+	//template<typename T>
+	//std::shared_ptr<T> GetSystem()
+	//{
+	//	return mSystemManager->GetSystem<T>();
+	//}
 
 
-	template<typename T>
-	void SetSystemSignature(Signature signature)
-	{
-		mSystemManager->SetSignature<T>(signature);
-	}
+	//template<typename T>
+	//void SetSystemSignature(Signature signature)
+	//{
+	//	mSystemManager->SetSignature<T>(signature);
+	//}
 
 
 	// Event methods

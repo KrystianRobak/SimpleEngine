@@ -1,6 +1,8 @@
 #pragma once
 
 #include "SystemInterface.h"
+#include "Transform.h"
+#include "coordinator.h"
 #include "Camera.h"
 
 class Event;

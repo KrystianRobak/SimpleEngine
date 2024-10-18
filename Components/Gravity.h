@@ -1,9 +1,11 @@
 #pragma once
 
+#include "LibExporter.h"
+
 #include <glm.hpp>
 
 
-struct Gravity
+struct COMPONENTS_API Gravity
 {
 	glm::vec3 force;
 };

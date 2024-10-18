@@ -136,7 +136,7 @@ void RenderSystem::SetupModelAndMesh(std::shared_ptr<Coordinator>& coordinator, 
 	if (signature.test(coordinator->GetComponentType<StaticMesh>()))
 	{
 		auto& staticMesh = coordinator->GetComponent<StaticMesh>(entity);
-		staticMesh.Draw(ChangeShader);
+		//staticMesh.Draw(ChangeShader);
 	}
 }
 
@@ -147,7 +147,7 @@ void RenderSystem::WindowSizeListener(Event& event)
 	auto windowWidth = event.GetParam<unsigned int>(Events::Window::Resized::WIDTH);
 	auto windowHeight = event.GetParam<unsigned int>(Events::Window::Resized::HEIGHT);
 
-	Camera* camera = coordinator->GetCamera();
+	//Camera* camera = coordinator->GetCamera();
 	//camera.projectionTransform = Camera::MakeProjectionTransform(45.0f, 0.1f, 1000.0f, windowWidth, windowHeight);
 	
 

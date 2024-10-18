@@ -9,15 +9,6 @@ bool Window::Init(int width, int height, const std::string& title)
     RenderCtx->init(this);
 
     UICtx->init(this);
-
-    application->Init();
-
-    propertyPanel = std::make_unique<PropertyPanel>();
-    sceneView = std::make_unique<SceneView>(application);
-    fileBrowser = std::make_unique<FileBrowser>();
-    itemsSelectionPanel = std::make_unique<ItemsSelectionPanel>();
-    addingPanel = std::make_unique<AddingPanel>();
-    controlPanel = std::make_unique<ControlPanel>();
    
     return IsRunning;
 }
@@ -34,8 +25,7 @@ void Window::on_resize(int width, int height)
     this->width = width;
     this->height = height;
 
-    sceneView->resize(this->width, this->height);
-    Render();
+    //sceneView->resize(this->width, this->height);
 }
 
 void Window::on_close()
@@ -43,27 +33,19 @@ void Window::on_close()
     IsRunning = false;
 }
 
-void Window::Render()
+void Window::PreRender()
 {
 
     RenderCtx->pre_render();
 
     UICtx->pre_render();
 
-    controlPanel->Render();
+}
 
-    sceneView->Render();
-
-    propertyPanel->Render();
-
-    itemsSelectionPanel->Render();
-
-    fileBrowser->Render();
-
-    addingPanel->Render();
+void Window::PostRender()
+{
 
     UICtx->post_render();
 
     RenderCtx->post_render();
-
 }

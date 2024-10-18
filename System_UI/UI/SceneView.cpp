@@ -29,9 +29,6 @@ void SceneView::Render()
     frameBuffer->bind();
 
     frameBuffer->unbind();
-   
-    if(application->IsRunning())
-        application->Update();
 
     ImGui::Begin("Scene");
 

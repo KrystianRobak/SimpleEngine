@@ -78,6 +78,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)CameraControlSystem;;$(SolutionDir)System_Renderer;$$(SolutionDir)System_Physics;$(SolutionDir)System_Physics;$(SolutionDir)System_UI;$(SolutionDir)System_UI</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -92,6 +93,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)CameraControlSystem;;$(SolutionDir)System_Renderer;$$(SolutionDir)System_Physics;$(SolutionDir)System_Physics;$(SolutionDir)System_UI;$(SolutionDir)System_UI</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -106,13 +108,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Liblaries\glew-2.1.0\include;C:\Liblaries\glm;C:\Liblaries\glfw-3.4.bin.WIN64\include;imgui;stb;C:\Liblaries\assimp\include;$(SolutionDir)Components;$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)CameraControlSystem;C:\Liblaries\glew-2.1.0\include;C:\Liblaries\glm;C:\Liblaries\glfw-3.4.bin.WIN64\include;imgui;stb;C:\Liblaries\assimp\include;$(SolutionDir)Components;$(SolutionDir)Core;%(AdditionalIncludeDirectories);$(SolutionDir)System_Renderer;$$(SolutionDir)System_Physics;$(SolutionDir)System_Physics;$(SolutionDir)System_UI</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Liblaries\glew-2.1.0\lib\Release\x64;C:\Liblaries\glfw-3.4.bin.WIN64\lib-vc2022;C:\Liblaries\assimp\lib;$(IntDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Liblaries\glew-2.1.0\lib\Release\x64;C:\Liblaries\glfw-3.4.bin.WIN64\lib-vc2022;C:\Liblaries\assimp\lib;$(SolutionDir)$(IntDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;assimp-vc143-mtd.lib;Components.lib;Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -124,7 +126,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Liblaries\glew-2.1.0\include;C:\Liblaries\glm;C:\Liblaries\glfw-3.4.bin.WIN64\include;imgui;stb;C:\Liblaries\assimp\include;$(SolutionDir)Components;$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)CameraControlSystem;C:\Liblaries\glew-2.1.0\include;C:\Liblaries\glm;C:\Liblaries\glfw-3.4.bin.WIN64\include;imgui;stb;C:\Liblaries\assimp\include;$(SolutionDir)Components;$(SolutionDir)Core;%(AdditionalIncludeDirectories);$(SolutionDir)System_Renderer;$$(SolutionDir)System_Physics;$(SolutionDir)System_Physics;$(SolutionDir)System_UI</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -132,7 +134,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Liblaries\glew-2.1.0\lib\Release\x64;C:\Liblaries\glfw-3.4.bin.WIN64\lib-vc2022;C:\Liblaries\assimp\lib;$(IntDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Liblaries\glew-2.1.0\lib\Release\x64;C:\Liblaries\glfw-3.4.bin.WIN64\lib-vc2022;C:\Liblaries\assimp\lib;$(SolutionDir)$(IntDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;assimp-vc143-mtd.lib;Components.lib;Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -152,15 +154,14 @@
     <ClCompile Include="ParticleOpenGl.cpp" />
     <ClCompile Include="RenderContext.cpp" />
     <ClCompile Include="SystemInitializer.cpp" />
+    <ClCompile Include="SystemInterface.cpp" />
     <ClCompile Include="UIContext.cpp" />
     <ClCompile Include="Window.cpp" />
-    <ClCompile Include="WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Build.h" />
     <ClInclude Include="FrameBuffer.h" />
-    <ClInclude Include="GJK.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\imgui_impl_glfw.h" />
@@ -175,10 +176,9 @@
     <ClInclude Include="OpenGlFrameBuffer.h" />
     <ClInclude Include="RenderContext.h" />
     <ClInclude Include="SystemInitializer.h" />
-    <ClInclude Include="UIComponent.h" />
+    <ClInclude Include="SystemInterface.h" />
     <ClInclude Include="UIContext.h" />
     <ClInclude Include="Window.h" />
-    <ClInclude Include="WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\DefaultCubeShader\DefaultCube_FragmentShader.fs" />

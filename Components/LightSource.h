@@ -1,14 +1,14 @@
 #pragma once
-
+#include "LibExporter.h" 
 #include <glm.hpp>
 
-enum class LightType {
+enum class COMPONENTS_API LightType {
     Directional,
     Point,
     Spot
 };
 
-struct LightSource {
+struct COMPONENTS_API LightSource {
     LightType type;
     glm::vec3 color;
     float intensity;

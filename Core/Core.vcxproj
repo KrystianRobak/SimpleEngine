@@ -25,7 +25,6 @@
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventManager.cpp" />
-    <ClCompile Include="SystemInterface.cpp" />
     <ClCompile Include="SystemManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -35,7 +34,6 @@
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventManager.h" />
-    <ClInclude Include="SystemInterface.h" />
     <ClInclude Include="SystemManager.h" />
     <ClInclude Include="Types.h" />
   </ItemGroup>

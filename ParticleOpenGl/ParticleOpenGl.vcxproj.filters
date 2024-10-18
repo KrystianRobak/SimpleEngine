@@ -13,97 +13,40 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Pliki źródłowe\imgui">
-      <UniqueIdentifier>{65853608-48a1-430b-a7cb-7edad39d84e3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki nagłówkowe\imgui">
       <UniqueIdentifier>{699c5b41-ffdb-4638-98f1-137219b13f9f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\NEW">
-      <UniqueIdentifier>{c63857e5-2cd0-4829-87f2-a88a02e7a323}</UniqueIdentifier>
+    <Filter Include="Pliki źródłowe\imgui">
+      <UniqueIdentifier>{ed7ebf5b-6dd4-482d-a9cd-2811357c855a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\NEW\Core">
-      <UniqueIdentifier>{e5973359-bcac-4e6d-8005-2c11efb740c4}</UniqueIdentifier>
+    <Filter Include="Pliki nagłówkowe\Window">
+      <UniqueIdentifier>{46f9271d-7537-4d76-aeb4-53abc81a8e41}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki nagłówkowe\NEW">
-      <UniqueIdentifier>{0d406ce3-54d3-402b-bc0c-8552516bb480}</UniqueIdentifier>
+    <Filter Include="Pliki źródłowe\Window">
+      <UniqueIdentifier>{f4e907c6-2cc4-489c-8897-da0686a44c70}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki nagłówkowe\NEW\Core">
-      <UniqueIdentifier>{b76498e9-5170-4f89-8d4c-35b1d84341ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki nagłówkowe\NEW\Components">
-      <UniqueIdentifier>{4cea9d3e-4dfd-444f-b1a3-b167d392148b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\NEW\Components">
-      <UniqueIdentifier>{42c36772-b01c-487a-a9d9-d7e69d8200bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\NEW\Systems">
-      <UniqueIdentifier>{e5e4a3df-e92b-47ab-9de9-17a3424d95df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\NEW\Render">
-      <UniqueIdentifier>{b64ae5d9-54e3-4ea0-b881-cc2ac68cb855}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\NEW\Render\UI">
-      <UniqueIdentifier>{3347633f-d889-4fb3-a30e-c7b723afd9e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\NEW\Render\Context">
+    <Filter Include="Pliki źródłowe\Window\Context">
       <UniqueIdentifier>{06ab498e-5004-478e-94e1-130baaa4a186}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki nagłówkowe\NEW\Render">
-      <UniqueIdentifier>{4ef8621b-454f-4e1d-922d-ab8edcd5d768}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki nagłówkowe\NEW\Render\UI">
-      <UniqueIdentifier>{7087a9d1-66ee-4db3-9064-3b43db650a1a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki nagłówkowe\NEW\Render\Context">
+    <Filter Include="Pliki nagłówkowe\Window\Context">
       <UniqueIdentifier>{e9676b50-b311-4e8e-bde7-e9596ba8d028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Window\FrameBuffer">
+      <UniqueIdentifier>{d6910742-8249-4e2d-bd8d-1a16ea217d85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Window\FrameBuffer">
+      <UniqueIdentifier>{0cfb93a0-17f3-4156-a984-d603f8865830}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ParticleOpenGl.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="imgui\imgui_widgets.cpp">
-      <Filter>Pliki źródłowe\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui\imgui_impl_glfw.cpp">
-      <Filter>Pliki źródłowe\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui\imgui_impl_opengl3.cpp">
-      <Filter>Pliki źródłowe\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui\imgui.cpp">
-      <Filter>Pliki źródłowe\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui\imgui_demo.cpp">
-      <Filter>Pliki źródłowe\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui\imgui_draw.cpp">
-      <Filter>Pliki źródłowe\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui\imgui_tables.cpp">
-      <Filter>Pliki źródłowe\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameBuffer.cpp">
-      <Filter>Pliki źródłowe\NEW\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenGlFrameBuffer.cpp">
-      <Filter>Pliki źródłowe\NEW\Render</Filter>
-    </ClCompile>
     <ClCompile Include="OpenGlContext.cpp">
-      <Filter>Pliki źródłowe\NEW\Render\Context</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderContext.cpp">
-      <Filter>Pliki źródłowe\NEW\Render\Context</Filter>
+      <Filter>Pliki źródłowe\Window\Context</Filter>
     </ClCompile>
     <ClCompile Include="UIContext.cpp">
-      <Filter>Pliki źródłowe\NEW\Render\Context</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>Pliki źródłowe\NEW\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowManager.cpp">
-      <Filter>Pliki źródłowe\NEW\Core</Filter>
+      <Filter>Pliki źródłowe\Window\Context</Filter>
     </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Pliki źródłowe</Filter>
@@ -114,9 +57,78 @@
     <ClCompile Include="SystemInitializer.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="SystemInterface.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>Pliki źródłowe\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_demo.cpp">
+      <Filter>Pliki źródłowe\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>Pliki źródłowe\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_glfw.cpp">
+      <Filter>Pliki źródłowe\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_opengl3.cpp">
+      <Filter>Pliki źródłowe\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_tables.cpp">
+      <Filter>Pliki źródłowe\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_widgets.cpp">
+      <Filter>Pliki źródłowe\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Pliki źródłowe\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderContext.cpp">
+      <Filter>Pliki źródłowe\Window\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameBuffer.cpp">
+      <Filter>Pliki źródłowe\Window\FrameBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGlFrameBuffer.cpp">
+      <Filter>Pliki źródłowe\Window\FrameBuffer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="OpenGlContext.h">
+      <Filter>Pliki nagłówkowe\Window\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderContext.h">
+      <Filter>Pliki nagłówkowe\Window\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="UIContext.h">
+      <Filter>Pliki nagłówkowe\Window\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemInitializer.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Build.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemInterface.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imconfig.h">
+      <Filter>Pliki nagłówkowe\imgui</Filter>
+    </ClInclude>
     <ClInclude Include="imgui\imgui.h">
+      <Filter>Pliki nagłówkowe\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_glfw.h">
+      <Filter>Pliki nagłówkowe\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_opengl3.h">
+      <Filter>Pliki nagłówkowe\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_opengl3_loader.h">
       <Filter>Pliki nagłówkowe\imgui</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imgui_internal.h">
@@ -131,56 +143,17 @@
     <ClInclude Include="imgui\imstb_truetype.h">
       <Filter>Pliki nagłówkowe\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="imgui\imgui_impl_glfw.h">
-      <Filter>Pliki nagłówkowe\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imgui_impl_opengl3_loader.h">
-      <Filter>Pliki nagłówkowe\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imgui_impl_opengl3.h">
-      <Filter>Pliki nagłówkowe\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imconfig.h">
-      <Filter>Pliki nagłówkowe\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="UIComponent.h">
-      <Filter>Pliki nagłówkowe\NEW\Render\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameBuffer.h">
-      <Filter>Pliki nagłówkowe\NEW\Render</Filter>
+    <ClInclude Include="Window.h">
+      <Filter>Pliki nagłówkowe\Window</Filter>
     </ClInclude>
     <ClInclude Include="IWindow.h">
-      <Filter>Pliki nagłówkowe\NEW\Render</Filter>
+      <Filter>Pliki nagłówkowe\Window</Filter>
     </ClInclude>
     <ClInclude Include="OpenGlFrameBuffer.h">
-      <Filter>Pliki nagłówkowe\NEW\Render</Filter>
+      <Filter>Pliki nagłówkowe\Window\FrameBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>Pliki nagłówkowe\NEW\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGlContext.h">
-      <Filter>Pliki nagłówkowe\NEW\Render\Context</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderContext.h">
-      <Filter>Pliki nagłówkowe\NEW\Render\Context</Filter>
-    </ClInclude>
-    <ClInclude Include="UIContext.h">
-      <Filter>Pliki nagłówkowe\NEW\Render\Context</Filter>
-    </ClInclude>
-    <ClInclude Include="WindowManager.h">
-      <Filter>Pliki nagłówkowe\NEW\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Application.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="GJK.h">
-      <Filter>Pliki nagłówkowe\NEW\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="SystemInitializer.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Build.h">
-      <Filter>Pliki nagłówkowe</Filter>
+    <ClInclude Include="FrameBuffer.h">
+      <Filter>Pliki nagłówkowe\Window\FrameBuffer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

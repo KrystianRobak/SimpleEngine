@@ -4,7 +4,7 @@
 #include "RigidBody.h"
 #include "Collision.h"
 #include "Player.h"
-
+#include <sstream>
 
 inline std::vector<std::string> splitString(const std::string& str, char delimiter) {
     std::vector<std::string> tokens;
@@ -209,7 +209,7 @@ void PropertyPanel::Render()
                     std::string name = parts[0];
                     std::string path = parts[1];
                     auto& staticMesh = coordinator->GetComponent<StaticMesh>(entity);
-                    staticMesh.loadModel(path);
+                    //staticMesh.loadModel(path);
                 }
             }
         }
@@ -217,6 +217,12 @@ void PropertyPanel::Render()
     }
 
     ImGui::End();
+}
+
+template<typename T>
+T ReturnMe()
+{
+    T const* const Value;
 }
 
 

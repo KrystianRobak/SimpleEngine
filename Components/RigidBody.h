@@ -1,8 +1,10 @@
 #pragma once
 
+#include "LibExporter.h"
+
 #include <glm.hpp>
 
-struct RigidBody
+struct COMPONENTS_API RigidBody
 {
     float mass = 3;
 	glm::vec3 velocity;

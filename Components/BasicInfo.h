@@ -1,6 +1,8 @@
 #pragma once
 
-struct BasicInfo 
+#include "LibExporter.h"
+
+struct COMPONENTS_API BasicInfo
 {
 	
 };

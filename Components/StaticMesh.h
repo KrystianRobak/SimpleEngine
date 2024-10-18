@@ -1,5 +1,7 @@
 #pragma once
 
+#include "LibExporter.h"
+
 //#include "Shader.h"
 #include "Mesh.h"
 
@@ -7,7 +9,7 @@
 //#include <assimp/Importer.hpp>
 //#include <assimp/postprocess.h>
 
-struct StaticMesh
+struct COMPONENTS_API StaticMesh
 {
 public:
     StaticMesh(bool gamma = false) : gammaCorrection(gamma)
@@ -24,7 +26,7 @@ public:
 private:
     // model data
     std::vector<Mesh> meshes;
-    std::string directory;
+    char* directory;
     std::vector<Texture> textures_loaded;
     bool gammaCorrection;
 };

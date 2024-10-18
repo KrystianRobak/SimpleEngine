@@ -2,7 +2,7 @@
 
 #include "SystemInterface.h"
 #include <vector>
-#include <minwindef.h>
+#include <windows.h>
 
 struct SystemInstance
 {

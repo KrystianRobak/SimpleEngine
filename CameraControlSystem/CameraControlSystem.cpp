@@ -1,18 +1,12 @@
 #include "CameraControlSystem.h"
 
-#include "Transform.h"
-#include "coordinator.h"
-
-
-
-
 
 void CameraControlSystem::Init()
 {
 	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
 	coordinator->AddEventListener(METHOD_LISTENER_ONE_PARAM(Events::Window::INPUT, CameraControlSystem::InputListener));
 
-	BindCamera(coordinator->GetCamera());
+	//BindCamera(coordinator->GetCamera());
 }
 
 void CameraControlSystem::Update(float dt)

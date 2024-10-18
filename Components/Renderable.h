@@ -1,8 +1,10 @@
 #pragma once
 
+#include "LibExporter.h"
+
 #include <glm.hpp>
 
-struct Renderable
+struct COMPONENTS_API Renderable
 {
 	glm::vec3 color;
     glm::vec3 Ambient;
