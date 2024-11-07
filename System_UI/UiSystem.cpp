@@ -1,3 +1,4 @@
+#define SYSTEMINTERFACE_EXPORTS
 #include "UiSystem.h"
 
 UiSystem::UiSystem()
@@ -10,10 +11,10 @@ UiSystem::~UiSystem()
 
 bool UiSystem::Initialize()
 {
-	return false;
+	return true;
 }
 
-void UiSystem::Execute()
+void UiSystem::Execute(float dt)
 {
 }
 

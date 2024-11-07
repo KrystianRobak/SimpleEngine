@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include "OpenGlFrameBuffer.h"
+#include "../FrameBuffer/OpenGlFrameBuffer.h"
 #include "UIComponent.h"
 
 #include <filesystem>

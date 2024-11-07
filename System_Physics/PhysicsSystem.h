@@ -5,7 +5,9 @@
 class PhysicsSystem : public SystemInterface
 {
 public:
-	void Init();
+	virtual bool Initialize() override;
+	virtual void Execute(float dt) override;
+	virtual void Cleanup() override;
 
-	void Update(float dt);
+	virtual std::string GetName() const override;
 };

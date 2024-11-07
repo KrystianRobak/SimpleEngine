@@ -3,7 +3,6 @@
 #include "UIComponent.h"
 
 #include "Coordinator.h"
-#include "StaticMesh.h"
 #include "Transform.h"
 
 class PropertyPanel

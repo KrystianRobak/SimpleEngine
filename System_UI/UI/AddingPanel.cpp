@@ -1,9 +1,5 @@
 #include "AddingPanel.h"
-#include "Gravity.h"
-#include "LightSource.h"
-#include "Renderable.h"
-#include "RigidBody.h"
-#include "Collision.h"
+
 #include <random>
 
 void AddingPanel::Render()
@@ -31,12 +27,6 @@ void AddingPanel::Render()
 
             coordinator->AddComponent(
                 entity,
-                StaticMesh{
-
-                });
-
-            coordinator->AddComponent(
-                entity,
                 Renderable{
                     .color = glm::vec4(40,40,40, 1)
                 });
@@ -51,9 +41,6 @@ void AddingPanel::Render()
                     .velocity = glm::vec3(0.0f, 0.0f, 0.0f),
                     .acceleration = glm::vec3(0.0f, 0.0f, 0.0f)
                 });
-
-            auto& staticMesh = coordinator->GetComponent<StaticMesh>(entity);
-            //staticMesh.loadModel("model/ball/ball.obj");
 
             auto& renderable = coordinator->GetComponent<Renderable>(entity);
 
@@ -86,12 +73,6 @@ void AddingPanel::Render()
 
             coordinator->AddComponent(
                 entity,
-                StaticMesh{
-
-                });
-
-            coordinator->AddComponent(
-                entity,
                 Renderable{
                     .color = glm::vec4(40,40,40, 1)
                 });
@@ -106,10 +87,6 @@ void AddingPanel::Render()
                     .velocity = glm::vec3(0.0f, 0.0f, 0.0f),
                     .acceleration = glm::vec3(0.0f, 0.0f, 0.0f)
                 });
-
-            auto& staticMesh = coordinator->GetComponent<StaticMesh>(entity);
-            //staticMesh.loadModel("model/cube/cube.obj");
-
             auto& renderable = coordinator->GetComponent<Renderable>(entity);
 
             std::random_device rd;
@@ -136,12 +113,6 @@ void AddingPanel::Render()
                     .scale = glm::vec3(3, 3, 3)
                 });
 
-            coordinator->AddComponent(
-                entity,
-                StaticMesh{
-
-                });
-
             coordinator->AddComponent<Gravity>(entity, {
                 glm::vec3(0.0f, 0, 0.0f)
                 });
@@ -161,9 +132,6 @@ void AddingPanel::Render()
                     .velocity = glm::vec3(0.0f, 0.0f, 0.0f),
                     .acceleration = glm::vec3(0.0f, 0.0f, 0.0f)
                 });
-
-            auto& staticMesh = coordinator->GetComponent<StaticMesh>(entity);
-            //staticMesh.loadModel("model/ball/ball.obj");
         }
     }
            

@@ -1,3 +1,4 @@
+#define SYSTEMINTERFACE_EXPORTS
 #include "RenderSystem.h"
 
 #include "Renderable.h"
@@ -28,7 +29,7 @@ void RenderSystem::RecompileShader()
 	LightShader = std::make_unique<Shader>("shaders/LightSourceShader/LightSource.vs", "shaders/LightSourceShader/LightSource.fs");
 }
 
-void RenderSystem::Init()
+bool RenderSystem::Initialize()
 {
 	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
 
@@ -39,9 +40,16 @@ void RenderSystem::Init()
 	
 	shader = std::make_unique<Shader>("Default.vs", "Default.fs");
 	LightShader = std::make_unique<Shader>("shaders/LightSourceShader/LightSource.vs", "shaders/LightSourceShader/LightSource.fs");
+
+	return true;
 }
 
-void RenderSystem::Update(float dt)
+std::string RenderSystem::GetName() const
+{
+	return "Renderer System";
+}
+
+void RenderSystem::Execute(float dt)
 {
 	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
 
@@ -118,6 +126,13 @@ void RenderSystem::Update(float dt)
 	glBindVertexArray(0);
 }
 
+void RenderSystem::Cleanup()
+{
+
+}
+
+
+
 void RenderSystem::SetupModelAndMesh(std::shared_ptr<Coordinator>& coordinator, const Entity& entity, Shader& ChangeShader)
 {
 	auto const& transform = coordinator->GetComponent<Transform>(entity);
@@ -153,3 +168,16 @@ void RenderSystem::WindowSizeListener(Event& event)
 
 }
 
+extern "C" {
+
+	SYSTEMINTERFACE_API SystemInterface* CreatePlugin()
+	{
+		return new RenderSystem();
+	}
+
+	SYSTEMINTERFACE_API void DestroyPlugin(SystemInterface* System)
+	{
+		delete System;
+	}
+
+}

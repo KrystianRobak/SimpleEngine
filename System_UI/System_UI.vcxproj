@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FrameBuffer\FrameBuffer.cpp" />
+    <ClCompile Include="FrameBuffer\OpenGlFrameBuffer.cpp" />
     <ClCompile Include="UiSystem.cpp" />
     <ClCompile Include="UI\AddingPanel.cpp" />
     <ClCompile Include="UI\ControlPanel.cpp" />
@@ -28,6 +30,8 @@
     <ClCompile Include="UI\SceneView.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FrameBuffer\FrameBuffer.h" />
+    <ClInclude Include="FrameBuffer\OpenGlFrameBuffer.h" />
     <ClInclude Include="UiSystem.h" />
     <ClInclude Include="UI\AddingPanel.h" />
     <ClInclude Include="UI\ControlPanel.h" />
@@ -35,6 +39,7 @@
     <ClInclude Include="UI\ItemsSelectionPanel.h" />
     <ClInclude Include="UI\PropertyPanel.h" />
     <ClInclude Include="UI\SceneView.h" />
+    <ClInclude Include="UI\UIComponent.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -123,7 +128,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Liblaries\glew-2.1.0\include;C:\Liblaries\glfw-3.4.bin.WIN64\include;$(SolutionDir)ParticleOpenGl;$(SolutionDir)Core;$(SolutionDir)Components;C:\Liblaries\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Liblaries\glew-2.1.0\include;C:\Liblaries\glfw-3.4.bin.WIN64\include;$(SolutionDir)ParticleOpenGl;$(SolutionDir)Core;$(SolutionDir)Components;C:\Liblaries\glm;$(SolutionDir)imgui;$(SolutionDir)stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,7 +146,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Liblaries\glew-2.1.0\include;C:\Liblaries\glfw-3.4.bin.WIN64\include;$(SolutionDir)ParticleOpenGl;$(SolutionDir)Core;$(SolutionDir)Components;C:\Liblaries\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Liblaries\glew-2.1.0\include;C:\Liblaries\glfw-3.4.bin.WIN64\include;$(SolutionDir)ParticleOpenGl;$(SolutionDir)Core;$(SolutionDir)Components;C:\Liblaries\glm;$(SolutionDir)imgui;$(SolutionDir)stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

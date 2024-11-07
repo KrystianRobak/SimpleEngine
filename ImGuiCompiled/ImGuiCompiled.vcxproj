@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{be9e9b86-a19f-4669-aee0-c541263d70b9}</ProjectGuid>
-    <RootNamespace>ParticleOpenGl</RootNamespace>
+    <ProjectGuid>{124f19a6-d4c7-48e7-9449-a36ce2f37e0b}</ProjectGuid>
+    <RootNamespace>ImGuiCompiled</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -40,19 +40,17 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -78,7 +76,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)CameraControlSystem;;$(SolutionDir)System_Renderer;$$(SolutionDir)System_Physics;$(SolutionDir)System_Physics;$(SolutionDir)System_UI;$(SolutionDir)System_UI</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -93,7 +90,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)CameraControlSystem;;$(SolutionDir)System_Renderer;$$(SolutionDir)System_Physics;$(SolutionDir)System_Physics;$(SolutionDir)System_UI;$(SolutionDir)System_UI</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -106,16 +102,16 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);GLEW_STATIC</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)CameraControlSystem;C:\Liblaries\glew-2.1.0\include;C:\Liblaries\glm;C:\Liblaries\glfw-3.4.bin.WIN64\include;$(SolutionDir)imgui;$(SolutionDir)stb;C:\Liblaries\assimp\include;$(SolutionDir)Components;$(SolutionDir)Core;%(AdditionalIncludeDirectories);$(SolutionDir)System_Renderer;$$(SolutionDir)System_Physics;$(SolutionDir)System_Physics;$(SolutionDir)System_UI</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Liblaries\glfw-3.4.bin.WIN64\include;C:\Liblaries\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Liblaries\glew-2.1.0\lib\Release\x64;C:\Liblaries\glfw-3.4.bin.WIN64\lib-vc2022;C:\Liblaries\assimp\lib;$(SolutionDir)$(IntDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;assimp-vc143-mtd.lib;Components.lib;Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Liblaries\glew-2.1.0\lib\Release\x64;C:\Liblaries\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -124,47 +120,39 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);GLEW_STATIC</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)CameraControlSystem;C:\Liblaries\glew-2.1.0\include;C:\Liblaries\glm;C:\Liblaries\glfw-3.4.bin.WIN64\include;$(SolutionDir)imgui;$(SolutionDir)stb;C:\Liblaries\assimp\include;$(SolutionDir)Components;$(SolutionDir)Core;%(AdditionalIncludeDirectories);$(SolutionDir)System_Renderer;$$(SolutionDir)System_Physics;$(SolutionDir)System_Physics;$(SolutionDir)System_UI</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Liblaries\glfw-3.4.bin.WIN64\include;C:\Liblaries\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Liblaries\glew-2.1.0\lib\Release\x64;C:\Liblaries\glfw-3.4.bin.WIN64\lib-vc2022;C:\Liblaries\assimp\lib;$(SolutionDir)$(IntDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;assimp-vc143-mtd.lib;Components.lib;Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Liblaries\glew-2.1.0\lib\Release\x64;C:\Liblaries\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="OpenGlContext.cpp" />
-    <ClCompile Include="ParticleOpenGl.cpp" />
-    <ClCompile Include="RenderContext.cpp" />
-    <ClCompile Include="SystemInitializer.cpp" />
-    <ClCompile Include="SystemInterface.cpp" />
-    <ClCompile Include="UIContext.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="imgui.cpp" />
+    <ClCompile Include="ImGuiCompiled.cpp" />
+    <ClCompile Include="imgui_draw.cpp" />
+    <ClCompile Include="imgui_impl_glfw.cpp" />
+    <ClCompile Include="imgui_impl_opengl3.cpp" />
+    <ClCompile Include="imgui_tables.cpp" />
+    <ClCompile Include="imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h" />
-    <ClInclude Include="Build.h" />
-    <ClInclude Include="IWindow.h" />
-    <ClInclude Include="OpenGlContext.h" />
-    <ClInclude Include="RenderContext.h" />
-    <ClInclude Include="SystemInitializer.h" />
-    <ClInclude Include="SystemInterface.h" />
-    <ClInclude Include="UIContext.h" />
-    <ClInclude Include="Window.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="shaders\DefaultCubeShader\DefaultCube_FragmentShader.fs" />
-    <None Include="shaders\DefaultCubeShader\DefaultCube_VertexShader.vs" />
-    <None Include="shaders\LightSourceShader\LightSource_FragmentShader.fs" />
-    <None Include="shaders\LightSourceShader\LightSource_VertexShader.vs" />
+    <ClInclude Include="imconfig.h" />
+    <ClInclude Include="imgui.h" />
+    <ClInclude Include="imgui_impl_glfw.h" />
+    <ClInclude Include="imgui_impl_opengl3.h" />
+    <ClInclude Include="imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="imgui_internal.h" />
+    <ClInclude Include="imstb_rectpack.h" />
+    <ClInclude Include="imstb_textedit.h" />
+    <ClInclude Include="imstb_truetype.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

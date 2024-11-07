@@ -13,17 +13,16 @@ class Event;
 class RenderSystem : public SystemInterface
 {
 public:
-	void RenderBorder();
-	void Init();
+	void RenderBorder() {};
 
 	void OnLightEntityAdded();
 	void RecompileShader();
 	
-	virtual bool Initialize() = 0;
-	virtual void Execute() = 0;
-	virtual void Cleanup() = 0;
+	virtual bool Initialize() override;
+	virtual void Execute(float dt) override;
+	virtual void Cleanup() override;
 
-	void Update(float dt);
+	virtual std::string GetName() const override;
 
 	void SetupModelAndMesh(std::shared_ptr<Coordinator>& coordinator, const Entity& entity, Shader& ChangeShader);
 

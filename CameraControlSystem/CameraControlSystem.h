@@ -11,9 +11,14 @@ class Event;
 class CameraControlSystem : public SystemInterface
 {
 public:
-	void Init();
 
-	void Update(float dt);
+	virtual ~CameraControlSystem() {}
+
+	virtual bool Initialize() override;
+	virtual void Execute(float dt) override;
+	virtual void Cleanup() override;
+
+	virtual std::string GetName() const override;
 
 	void BindCamera(Camera* NewCamera)
 	{	

@@ -1,3 +1,4 @@
+#define SYSTEMINTERFACE_EXPORTS
 #include "PhysicsSystem.h"
 
 #include "coordinator.h"
@@ -9,11 +10,12 @@
 
 #include <memory>
 
-void PhysicsSystem::Init()
+bool PhysicsSystem::Initialize()
 {
+	return true;
 }
 
-void PhysicsSystem::Update(float dt)
+void PhysicsSystem::Execute(float dt)
 {
 	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
 
@@ -34,7 +36,28 @@ void PhysicsSystem::Update(float dt)
 	}
 }
 
+void PhysicsSystem::Cleanup()
+{
+}
 
+std::string PhysicsSystem::GetName() const
+{
+	return "Physics System";
+}
+
+extern "C" {
+
+	SYSTEMINTERFACE_API SystemInterface* CreatePlugin()
+	{
+		return new PhysicsSystem();
+	}
+
+	SYSTEMINTERFACE_API void DestroyPlugin(SystemInterface* System)
+	{
+		delete System;
+	}
+
+}
 
 // RESPOSITIONING
 

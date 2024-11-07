@@ -1,15 +1,17 @@
+#define SYSTEMINTERFACE_EXPORTS
 #include "CameraControlSystem.h"
 
 
-void CameraControlSystem::Init()
+bool CameraControlSystem::Initialize()
 {
 	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
 	coordinator->AddEventListener(METHOD_LISTENER_ONE_PARAM(Events::Window::INPUT, CameraControlSystem::InputListener));
 
+	return true;
 	//BindCamera(coordinator->GetCamera());
 }
 
-void CameraControlSystem::Update(float dt)
+void CameraControlSystem::Execute(float dt)
 {
 	float speed = 0.25f;
 
@@ -43,8 +45,30 @@ void CameraControlSystem::Update(float dt)
 	mButtons = 0;
 }
 
+void CameraControlSystem::Cleanup()
+{
+}
+
+std::string CameraControlSystem::GetName() const
+{
+	return "Camera Control System";
+}
+
 void CameraControlSystem::InputListener(Event& event)
 {
 	mButtons = event.GetParam<int>("InputKey");
 }
 
+extern "C" {
+
+	SYSTEMINTERFACE_API SystemInterface* CreatePlugin()
+	{
+		return new CameraControlSystem();
+	}
+
+	SYSTEMINTERFACE_API void DestroyPlugin(SystemInterface* System)
+	{
+		delete System;
+	}
+
+}

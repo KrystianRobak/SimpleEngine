@@ -20,7 +20,7 @@ public:
 
 	bool InitializeSystem(const std::string& dllPath);
 
-	void ExecuteSystems();
+	void ExecuteSystems(float dt);
 
 	void DestroyPlugins();
 

@@ -20,7 +20,7 @@ public:
 
 
     virtual bool Initialize() = 0;
-    virtual void Execute() = 0;
+    virtual void Execute(float dt) = 0;
     virtual void Cleanup() = 0;
 
     virtual std::string GetName() const = 0;

@@ -74,7 +74,7 @@ void RenderComponentsMenu(std::int32_t& entity, std::bitset<32>& signature)
                     });
             }
         }
-        if (!signature.test(coordinator->GetComponentType<StaticMesh>()))
+       /* if (!signature.test(coordinator->GetComponentType<StaticMesh>()))
         {
             if (ImGui::Button("StaticMesh"))
             {
@@ -84,7 +84,7 @@ void RenderComponentsMenu(std::int32_t& entity, std::bitset<32>& signature)
 
                     });
             }
-        }
+        }*/
         if (!signature.test(coordinator->GetComponentType<Collider>()))
         {
             if (ImGui::Button("Collision"))
@@ -134,13 +134,13 @@ void RenderComponentsMenu(std::int32_t& entity, std::bitset<32>& signature)
                 coordinator->RemoveComponent<RigidBody>(entity);
             }
         }
-        if (signature.test(coordinator->GetComponentType<StaticMesh>()))
+        /*if (signature.test(coordinator->GetComponentType<StaticMesh>()))
         {
             if (ImGui::Button("StaticMesh"))
             {
                 coordinator->RemoveComponent<StaticMesh>(entity);
             }
-        }
+        }*/
         if (signature.test(coordinator->GetComponentType<Collider>()))
         {
             if (ImGui::Button("Collision"))
@@ -208,7 +208,7 @@ void PropertyPanel::Render()
                 {
                     std::string name = parts[0];
                     std::string path = parts[1];
-                    auto& staticMesh = coordinator->GetComponent<StaticMesh>(entity);
+                    //auto& staticMesh = coordinator->GetComponent<StaticMesh>(entity);
                     //staticMesh.loadModel(path);
                 }
             }

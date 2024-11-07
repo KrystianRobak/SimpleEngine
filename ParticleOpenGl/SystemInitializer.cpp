@@ -55,13 +55,13 @@ bool SystemInitializer::InitializeSystem(const std::string& dllPath)
     return true;
 }
 
-void SystemInitializer::ExecuteSystems()
+void SystemInitializer::ExecuteSystems(float dt)
 {
     for (auto& instance : Systems)
     {
         if (instance.System)
         {
-            instance.System->Execute();
+            instance.System->Execute(dt);
         }
     }
 }

@@ -19,6 +19,12 @@
     <Filter Include="Header Files\UI">
       <UniqueIdentifier>{44de437b-d91c-4961-baa6-c077a6409b92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\FrameBuffer">
+      <UniqueIdentifier>{6e0d21bc-f5dc-407e-bedb-601202f11ff9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FrameBuffer">
+      <UniqueIdentifier>{56debc50-071e-43e0-b7b2-e74c144299f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UiSystem.cpp">
@@ -42,6 +48,12 @@
     <ClCompile Include="UI\SceneView.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
+    <ClCompile Include="FrameBuffer\FrameBuffer.cpp">
+      <Filter>Source Files\FrameBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameBuffer\OpenGlFrameBuffer.cpp">
+      <Filter>Source Files\FrameBuffer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\AddingPanel.h">
@@ -64,6 +76,15 @@
     </ClInclude>
     <ClInclude Include="UiSystem.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIComponent.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameBuffer\FrameBuffer.h">
+      <Filter>Header Files\FrameBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameBuffer\OpenGlFrameBuffer.h">
+      <Filter>Header Files\FrameBuffer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
