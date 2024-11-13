@@ -20,29 +20,37 @@
 
 #include <chrono>
 #include <random>
+#include "Window.h"
+#include "SystemInitializer.h"
 
 
 class Application
 {
-public:
-	void Init();
-	void Update();
+private:
 	void Render();
 
-	void RenderEntitiesUI();
+	void LoadSystems();
 
 	void ToggleApplication()
 	{
 		this->running = !this->running;
 	}
 
+public:
+
+	void Init();
+	void Update();
+
 	bool IsRunning()
 	{
 		return running;
 	}
+
 private:
 	float dt = 0.0f;
 	bool running;
 	std::shared_ptr<Coordinator> Coordinator;
+	std::shared_ptr<Window> WindowManager;
+	std::shared_ptr<SystemInitializer> Initializer;
 };
 

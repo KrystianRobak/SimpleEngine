@@ -1,20 +1,15 @@
-﻿#include "coordinator.h"
-#include "Window.h"
-#include "Types.h"
+﻿#include "Application.h"
 
 int main()
 {
-	std::shared_ptr<Coordinator> coordinator = Coordinator::GetCoordinator();
+	Application App = Application();
 
-	coordinator->Init();
+	App.Init();
 
-	Window windowManager;
-	windowManager.Init(SCR_WIDTH, SCR_WIDTH, "REngine");
-
-	while (true);
-
-
-	windowManager.~Window();
+	while (App.IsRunning())
+	{
+		App.Update();
+	}
 
 return 0;
 }

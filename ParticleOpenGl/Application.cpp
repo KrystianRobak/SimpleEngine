@@ -24,25 +24,35 @@ float DtTimer()
 }
 
 
+void Application::LoadSystems()
+{
+	Initializer->InitializeSystem("System_Physics.dll");
+	Initializer->InitializeSystem("System_Renderer.dll");
+	Initializer->InitializeSystem("System_UI.dll");
+	Initializer->InitializeSystem("System_CameraControl.dll");
+}
+
 void Application::Init()
 {
 	Coordinator = Coordinator::GetCoordinator();
 
+	Coordinator->Init();
+
 	Coordinator->AddEventListener(METHOD_LISTENER_NO_PARAM(Events::Application::TOGGLE, Application::ToggleApplication));
+
+	WindowManager = std::make_shared<Window>();
+	WindowManager->Init(SCR_WIDTH, SCR_WIDTH, "REngine");
+
+
 }
 
 void Application::Update()
 {
 	dt = DtTimer();
-	
+	Initializer->ExecuteSystems(dt);
 }
 
 void Application::Render()
-{
-}
-
-
-void Application::RenderEntitiesUI()
 {
 
 }
